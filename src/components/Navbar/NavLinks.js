@@ -9,7 +9,7 @@ export default function NavLinks(props) {
             <NavLink
               to={link.url}
               className={({ isActive }) => {
-                const commonClasses = "block py-2 pr-4 pl-3 rounded md:p-0" + " ";
+                const commonClasses = "block py-2 pr-4 pl-3 rounded md:p-0 ";
                 return commonClasses.concat(
                   isActive
                     ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700  dark:text-white"
