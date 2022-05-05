@@ -5,11 +5,13 @@ import logo from "../../assets/logo.png";
 export default function NavBrand() {
   return (
     <>
-      <NavLink to="/" className="flex items-center">
-        <img src={logo} className="mr-2 h-6 sm:h-8" alt="Logo" />
-        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-          AdiNotes
-        </span>
+      <NavLink to="/">
+        <div className="flex transition-all duration-300 ease-linear ">
+          <img src={logo} className="mr-1 h-6" alt="Logo" />
+          <span className="self-center text-xl font-semibold whitespace-nowrap text-green-500">
+            AdiNotes
+          </span>
+        </div>
       </NavLink>
     </>
   );
