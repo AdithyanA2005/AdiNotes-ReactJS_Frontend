@@ -1,25 +1,18 @@
-import React from "react";
-import NoteItem from "../components/Notes/NoteItem";
-import NotesContainer from "../components/Notes/NotesContainer";
-
+import React, { useContext, useEffect } from "react";
+import Notes from "../components/Notes";
+import NoteContext from "../context/Note/NoteContext";
+import NewNoteForm from "../components/NewNote";
 export default function Main() {
-  const notes = [];
+  const { notes, getNotes } = useContext(NoteContext);
+  useEffect(() => {
+    getNotes();
+  }, []);
+
   return (
     <>
-      <div className="p-4">
-        <NotesContainer>
-          {notes.map((note) => {
-            return (
-              <NoteItem
-                id={note.id}
-                title={note.title}
-                description={note.description}
-                tag="Hello"
-                key={note.id}
-              />
-            );
-          })}
-        </NotesContainer>
+      <div className="flex flex-col gap-7">
+        <NewNoteForm />
+        <Notes notes={notes} />
       </div>
     </>
   );

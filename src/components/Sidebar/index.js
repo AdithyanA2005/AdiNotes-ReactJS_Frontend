@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ReactComponent as AngleUpIcon } from "../../assets/sortup.svg";
 import { ReactComponent as BurgerIcon } from "../../assets/burger.svg";
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
 import { ReactComponent as NoteIcon } from "../../assets/note.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as SignOutIcon } from "../../assets/signout.svg";
+import { ReactComponent as SignInIcon } from "../../assets/signin.svg";
 import { ReactComponent as SunIcon } from "../../assets/sun.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import SidebarButton from "./SidebarButton";
 import SidebarSeperator from "./SidebarSeperator";
+import AuthContext from "../../context/Auth/AuthContext";
+import NoteItem from "../Notes/NoteItem";
+import NoteContext from "../../context/Note/NoteContext";
+import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 
 export default function Sidebar() {
   const [sidebarActive, setSidebarActive] = useState(false);
@@ -16,6 +21,9 @@ export default function Sidebar() {
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   const toggleSidebar = () => setSidebarActive((prev) => !prev);
   const backToTop = () => window.scroll(0, 0);
+  const { auth } = useContext(AuthContext);
+  const { createNewModal, getNotes } = useContext(NoteContext);
+  const { openNewNoteForm } = useContext(NoteFormContext);
 
   useEffect(() => {
     localStorage.theme === "light" && setTheme("light");
@@ -30,48 +38,64 @@ export default function Sidebar() {
   return (
     <>
       {/* HamBurger */}
-      <div className="z-[100] fixed top-0 left-0 p-2 flex justify-center items-center bg-white dark:bg-slate-900 dark:border-slate-700 transition-all ease-in-out duration-300 border-b">
-        <SidebarButton onClick={toggleSidebar} sidebarActive={sidebarActive} isBurger>
-          {sidebarActive ? <CloseIcon /> : <BurgerIcon />}
-        </SidebarButton>
+      <div className="z-[100] fixed top-0 left-0 h-16 transition-all ease-in-out duration-300 ">
+        <div className="p-3 -mt-[1px] flex border-b dark:border-slate-700 justify-center items-center bg-white dark:bg-slate-900 ">
+          <SidebarButton onClick={toggleSidebar} sidebarActive={sidebarActive} isBurger>
+            {sidebarActive ? <CloseIcon /> : <BurgerIcon />}
+          </SidebarButton>
+        </div>
       </div>
 
       <div
         className={`${
           sidebarActive ? "w-60" : "w-16"
-        } z-40 fixed transition-all ease-in-out duration-300 h-screen p-2.5 max-h-screen pt-5 top-0 left-0 mt-16 flex flex-col gap-4 shadow-lg bg-white dark:text-white dark:bg-slate-900`}
+        } z-40 fixed transition-all ease-in-out duration-300 h-screen max-h-screen top-0 left-0 mt-16 shadow-lg`}
         onMouseLeave={() => setSidebarActive(false)}
       >
-        {/* Create New Note */}
-        <SidebarButton sidebarActive={sidebarActive} tooltip="New Note">
-          <PlusIcon />
-        </SidebarButton>
+        <div className="flex flex-col gap-4 p-2.5 pt-5 h-full  bg-white dark:text-white dark:bg-slate-900">
+          {/* Create New Note */}
 
-        {/* Fetch All Notes */}
-        <SidebarButton sidebarActive={sidebarActive} tooltip="All Notes">
-          <NoteIcon />
-        </SidebarButton>
+          <SidebarButton
+            disabled={!auth}
+            onClick={openNewNoteForm}
+            sidebarActive={sidebarActive}
+            tooltip="New Note"
+          >
+            <PlusIcon />
+          </SidebarButton>
 
-        {/* Add Hr */}
-        <SidebarSeperator />
+          {/* Fetch All Notes */}
+          <SidebarButton
+            disabled={!auth}
+            onClick={() => getNotes()}
+            sidebarActive={sidebarActive}
+            tooltip="Refresh All Notes"
+          >
+            <NoteIcon />
+          </SidebarButton>
 
-        {/* Toggle App Theme */}
-        <SidebarButton sidebarActive={sidebarActive} onClick={toggleTheme} tooltip="Toggle Theme">
-          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-        </SidebarButton>
+          {/* Add Hr */}
+          <SidebarSeperator />
 
-        {/* Go to top of page */}
-        <SidebarButton sidebarActive={sidebarActive} onClick={backToTop} tooltip="Back To Top">
-          <AngleUpIcon />
-        </SidebarButton>
+          {/* Toggle App Theme */}
+          <SidebarButton sidebarActive={sidebarActive} onClick={toggleTheme} tooltip="Toggle Theme">
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          </SidebarButton>
 
-        {/* Add Hr */}
-        <SidebarSeperator />
+          {/* Go to top of page */}
+          <SidebarButton sidebarActive={sidebarActive} onClick={backToTop} tooltip="Back To Top">
+            <AngleUpIcon />
+          </SidebarButton>
 
-        {/* Sign out */}
-        <SidebarButton sidebarActive={sidebarActive} tooltip="Sign Out">
-          <SignOutIcon />
-        </SidebarButton>
+          {/* Add Hr */}
+          <SidebarSeperator />
+
+          {/* Sign out */}
+
+          <SidebarButton disabled={!auth} sidebarActive={sidebarActive} tooltip="Sign Out">
+            {auth ? <SignOutIcon /> : <SignInIcon />}
+          </SidebarButton>
+        </div>
       </div>
     </>
   );
