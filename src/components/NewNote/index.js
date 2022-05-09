@@ -42,7 +42,7 @@ export default function CreateNew() {
       <form
         ref={formRef}
         onSubmit={handleFormSubmit}
-        className="p-3.5 w-5/6 md:max-w-2xl mx-auto rounded-lg shadow-lg flex flex-col gap-3 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700"
+        className="p-3.5 w-5/6 md:max-w-2xl mx-auto rounded-lg shadow-lg flex flex-col gap-5 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700"
         method="post"
       >
         {formExpanded && (
@@ -77,7 +77,7 @@ export default function CreateNew() {
         </InputContainer>
 
         {formExpanded && (
-          <div className="flex justify-between mt-2.5">
+          <div className="flex justify-between mt-2">
             <button
               type="submit"
               className="text-white bg-purple-500 text-sm font-medium rounded-md py-2 px-2.5"
