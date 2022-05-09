@@ -8,7 +8,7 @@ export default function SidebarButton({ children, tooltip, isBurger, sidebarActi
         {...props}
         className={`${
           isBurger
-            ? "h-12 w-12 bg-green-500 text-white hover:rounded-lg rounded-[0.9rem]"
+            ? "h-11 w-11 bg-green-500 text-white hover:rounded-lg rounded-[0.9rem] flex items-center justify-center"
             : "h-12 dark:bg-slate-800 dark:text-green-500 dark:hover:bg-green-500 dark:hover:text-white text-green-500 bg-green-100 hover:bg-green-500 hover:text-white"
         } ${
           !isBurger &&
@@ -16,7 +16,9 @@ export default function SidebarButton({ children, tooltip, isBurger, sidebarActi
         } group relative transition-all duration-300 ease-in-out cursor-pointer flex justify-start items-center shadow-lg`}
       >
         {/* Icon */}
-        <span className="h-12 w-12 p-3 absolute">{children}</span>
+        <span className={`${isBurger ? "h-11 w-11 p-3" : "h-12 w-12 p-3"} text-center  absolute `}>
+          {children}
+        </span>
 
         {/* Tooltip */}
         {tooltip && !sidebarActive && (
