@@ -21,7 +21,7 @@ export default function Sidebar() {
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   const toggleSidebar = () => setSidebarActive((prev) => !prev);
   const backToTop = () => window.scroll(0, 0);
-  const { auth } = useContext(AuthContext);
+  const { auth, logoutFromAccount } = useContext(AuthContext);
   const { createNewModal, getNotes } = useContext(NoteContext);
   const { openNewNoteForm } = useContext(NoteFormContext);
 
@@ -38,8 +38,8 @@ export default function Sidebar() {
   return (
     <>
       {/* HamBurger */}
-      <div className="z-[100] fixed top-0 left-0 h-16 transition-all ease-in-out duration-300 ">
-        <div className="p-3 -mt-[1px] flex border-b dark:border-slate-700 justify-center items-center bg-white dark:bg-slate-900 ">
+      <div className="z-[100] fixed top-0 left-0 transition-all ease-in-out duration-300 ">
+        <div className="p-2.5 -mt-[1px] flex border-b dark:border-slate-700 justify-center items-center bg-white dark:bg-slate-900 ">
           <SidebarButton onClick={toggleSidebar} sidebarActive={sidebarActive} isBurger>
             {sidebarActive ? <CloseIcon /> : <BurgerIcon />}
           </SidebarButton>
@@ -92,7 +92,12 @@ export default function Sidebar() {
 
           {/* Sign out */}
 
-          <SidebarButton disabled={!auth} sidebarActive={sidebarActive} tooltip="Sign Out">
+          <SidebarButton
+            disabled={!auth}
+            onClick={logoutFromAccount}
+            sidebarActive={sidebarActive}
+            tooltip="Sign Out"
+          >
             {auth ? <SignOutIcon /> : <SignInIcon />}
           </SidebarButton>
         </div>
