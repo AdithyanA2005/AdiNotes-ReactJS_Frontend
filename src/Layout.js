@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
-import { Bounce, Fade, Slide } from "react-awesome-reveal";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import LoadingBar from "react-top-loading-bar";
 import { useContext } from "react";
 import LoaderContext from "./context/Loader/LoaderContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Layout() {
   const { progress, setProgress } = useContext(LoaderContext);
@@ -27,6 +28,11 @@ export default function Layout() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-left"
+        hideProgressBar={true}
+        theme={localStorage.darkTheme ? "dark" : "light"}
+      />
     </>
   );
 }
