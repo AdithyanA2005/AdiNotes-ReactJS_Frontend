@@ -13,26 +13,17 @@ import SidebarSeperator from "./SidebarSeperator";
 import AuthContext from "../../context/Auth/AuthContext";
 import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
+import ThemeContext from "../../context/Theme/ThemeContext";
 
 export default function Sidebar() {
   const [sidebarActive, setSidebarActive] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const { theme, setTheme } = useContext(ThemeContext);
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   const toggleSidebar = () => setSidebarActive((prev) => !prev);
   const backToTop = () => window.scroll(0, 0);
   const { auth, setLogoutModalActive } = useContext(AuthContext);
   const { getNotes } = useContext(NoteContext);
   const { openNewNoteForm } = useContext(NoteFormContext);
-
-  useEffect(() => {
-    localStorage.theme === "light" && setTheme("light");
-  }, []);
-
-  useEffect(() => {
-    localStorage.theme = theme;
-    if (theme === "dark") return document.documentElement.classList.add("dark");
-    return document.documentElement.classList.remove("dark");
-  }, [theme]);
 
   return (
     <>

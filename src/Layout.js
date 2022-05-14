@@ -6,10 +6,11 @@ import { useContext } from "react";
 import LoaderContext from "./context/Loader/LoaderContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeContext from "./context/Theme/ThemeContext";
 
 export default function Layout() {
   const { progress, setProgress } = useContext(LoaderContext);
-
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <div className=" bg-slate-50 dark:bg-slate-800 min-h-screen">
@@ -28,11 +29,7 @@ export default function Layout() {
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="bottom-left"
-        hideProgressBar={true}
-        theme={localStorage.darkTheme ? "dark" : "light"}
-      />
+      <ToastContainer position="bottom-left" hideProgressBar={true} theme={theme} />
     </>
   );
 }

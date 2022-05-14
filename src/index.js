@@ -7,18 +7,21 @@ import NoteFormState from "./context/NoteForm/NoteFormState";
 import NoteState from "./context/Note/NoteState";
 import "./index.css";
 import LoaderState from "./context/Loader/LoaderState";
+import ThemeState from "./context/Theme/ThemeState";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <LoaderState>
-    <AuthState>
-      <NoteState>
-        <NoteFormState>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </NoteFormState>
-      </NoteState>
-    </AuthState>
-  </LoaderState>
+  <ThemeState>
+    <LoaderState>
+      <AuthState>
+        <NoteState>
+          <NoteFormState>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </NoteFormState>
+        </NoteState>
+      </AuthState>
+    </LoaderState>
+  </ThemeState>
 );
