@@ -25,7 +25,7 @@ export default function AuthModalContainer(props) {
             direction="down"
             className="w-full p-4 rounded-xl shadow-lg bg-white dark:bg-slate-800 "
           >
-            <div>
+            <>
               <h2 className="mb-4 font-bold text-2xl text-slate-700 dark:text-slate-300">
                 {props.modalHeading}
               </h2>
@@ -33,7 +33,7 @@ export default function AuthModalContainer(props) {
                 {props.children}
                 <ActionButtons closeHandle={props.closeHandle} />
               </form>
-            </div>
+            </>
           </Slide>
         </div>
       </div>

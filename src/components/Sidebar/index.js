@@ -11,7 +11,6 @@ import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import SidebarButton from "./SidebarButton";
 import SidebarSeperator from "./SidebarSeperator";
 import AuthContext from "../../context/Auth/AuthContext";
-import NoteItem from "../Notes/NoteItem";
 import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 
@@ -21,8 +20,8 @@ export default function Sidebar() {
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   const toggleSidebar = () => setSidebarActive((prev) => !prev);
   const backToTop = () => window.scroll(0, 0);
-  const { auth, logoutFromAccount } = useContext(AuthContext);
-  const { createNewModal, getNotes } = useContext(NoteContext);
+  const { auth, setLogoutModalActive } = useContext(AuthContext);
+  const { getNotes } = useContext(NoteContext);
   const { openNewNoteForm } = useContext(NoteFormContext);
 
   useEffect(() => {
@@ -94,7 +93,7 @@ export default function Sidebar() {
 
           <SidebarButton
             disabled={!auth}
-            onClick={logoutFromAccount}
+            onClick={() => setLogoutModalActive(true)}
             sidebarActive={sidebarActive}
             tooltip="Sign Out"
           >

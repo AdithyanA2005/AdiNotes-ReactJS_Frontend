@@ -7,6 +7,7 @@ const AuthState = (props) => {
   const [auth, setAuth] = useState(null);
   const [loginModalActive, setLoginModalActive] = useState(false);
   const [signUpModalActive, setSignUpModalActive] = useState(false);
+  const [logoutModalActive, setLogoutModalActive] = useState(false);
   const axios = getAxios();
 
   useEffect(() => {
@@ -16,6 +17,7 @@ const AuthState = (props) => {
 
   const logoutFromAccount = () => {
     localStorage.removeItem("authToken");
+    setLogoutModalActive(false);
     setAuth(null);
     toast.info("Logout Success", {
       autoClose: 1500,
@@ -54,6 +56,8 @@ const AuthState = (props) => {
         loginModalActive,
         logoutFromAccount,
         setLoginModalActive,
+        logoutModalActive,
+        setLogoutModalActive,
         signUpModalActive,
         setSignUpModalActive,
       }}
