@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { ReactComponent as BinIcon } from "../../assets/bin.svg";
-import NoteContext from "../../context/Note/NoteContext";
+import DeleteModal from "./DeleteModal";
 
 export default function NoteItem({ id, title, description, tag }) {
   const [noteActive, setNoteActive] = useState(false);
   const truncate = (text, end) => (text.length > end ? text.slice(0, end) + "..." : text);
   const deleteRef = useRef();
-  const { deleteNote } = useContext(NoteContext);
+  const [deleteModalActive, setDeleteModalActive] = useState(false);
 
   return (
     <>
+      {deleteModalActive && <DeleteModal id={id} closeModal={() => setDeleteModalActive(false)} />}
       <div className="group w-5/6 min-h-[13rem] md:max-w-[20rem] relative">
         <div
           onMouseOver={(event) => {
@@ -36,7 +37,7 @@ export default function NoteItem({ id, title, description, tag }) {
 
             <button
               ref={deleteRef}
-              onClick={() => deleteNote(id)}
+              onClick={() => setDeleteModalActive(true)}
               className="group-hover:scale-100 scale-0 z-50 w-3.5 rounded-tl-xl transition-all duration-300 opacity-70 text-slate-500 hover:opacity-100 hover:text-red-500 hover:w-4"
             >
               <BinIcon />
