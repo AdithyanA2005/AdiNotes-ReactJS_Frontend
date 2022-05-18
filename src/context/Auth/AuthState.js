@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import getAxios from "../../axios";
 import AuthContext from "./AuthContext";
+import LoaderContext from "../Loader/LoaderContext";
 
 const AuthState = (props) => {
   const [auth, setAuth] = useState(null);
   const [loginModalActive, setLoginModalActive] = useState(false);
   const [signUpModalActive, setSignUpModalActive] = useState(false);
   const [logoutModalActive, setLogoutModalActive] = useState(false);
+  const { setProgress } = useContext(LoaderContext);
   const axios = getAxios();
 
   useEffect(() => {
@@ -16,21 +18,25 @@ const AuthState = (props) => {
   }, [auth]);
 
   const logoutFromAccount = () => {
+    setProgress(10);
     localStorage.removeItem("authToken");
     setLogoutModalActive(false);
     setAuth(null);
     toast.info("Logout Success", {
       autoClose: 1500,
     });
+    setProgress(100);
   };
 
   const loginToAccount = (account, password) => {
+    setProgress(20);
     axios
       .post("/auth/login", {
         account: account,
         password: password,
       })
       .then((res) => {
+        setProgress(70);
         setLoginModalActive(false);
         setAuth({ authToken: res.data.authToken });
         toast.success("Login Success", {
@@ -44,6 +50,9 @@ const AuthState = (props) => {
           hideProgressBar: false,
           autoClose: 2000,
         });
+      })
+      .finally(() => {
+        setProgress(100);
       });
   };
 
