@@ -1,4 +1,6 @@
+import { isValidDateValue } from "@testing-library/user-event/dist/utils";
 import React, { useState, useEffect, useContext } from "react";
+import AuthFormContext from "../../context/AuthForm/AuthFormContext";
 import SignUpInput from "./SignUpInput";
 
 export default function Password() {
@@ -11,8 +13,8 @@ export default function Password() {
   const [rePassword, setRePassword] = useState("");
 
   // Variables to store the validation errors
-  const [passwordErr, setPasswordErr] = useState("");
-  const [rePasswordErr, setRePasswordErr] = useState("");
+  const { passwordErr, setPasswordErr } = useContext(AuthFormContext);
+  const { rePasswordErr, setRePasswordErr } = useContext(AuthFormContext);
 
   // Onchange handle for enter-password
   const passwordOnChange = (event) => {
@@ -25,6 +27,7 @@ export default function Password() {
     setRePasswordErr("");
 
     // Checks for validation errors
+    if (value.length === 0) return setPasswordErr("Password shouldn't remain empty");
     if (value.length < passwordMinLen)
       return setPasswordErr(`Password should at least be ${passwordMinLen} characters long`);
     return setPasswordErr();

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AuthFormContext from "../../context/AuthForm/AuthFormContext";
 import SignUpInput from "./SignUpInput";
 
 export default function Email() {
   const [email, setEmail] = useState(""); // Variable for storing the email
-  const [emailErr, setEmailErr] = useState(""); // Variable to store the validation error
+  const { emailErr, setEmailErr } = useContext(AuthFormContext); // Variable to store the validation error
 
   // Onchange handle for enter-email
   const emailOnChange = (event) => {
@@ -16,9 +17,8 @@ export default function Email() {
     setEmail(value);
 
     // Checks for validation errors
-    if (!isEmail.test(value)) {
-      return setEmailErr("Enter a valid email id");
-    }
+    if (value.length === 0) return setEmailErr("Email shouldn't remain empty");
+    if (!isEmail.test(value)) return setEmailErr("Enter a valid email id");
     return setEmailErr();
   };
 

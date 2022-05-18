@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/Auth/AuthContext";
+import AuthFormContext from "../../context/AuthForm/AuthFormContext";
 import AuthModalContainer from "../AuthModalContainer";
 import Email from "./Email";
 import NameUsername from "./NameUsername";
@@ -9,7 +10,10 @@ import SignUpInput from "./SignUpInput";
 
 export default function LoginForm() {
   const { setSignUpModalActive } = useContext(AuthContext);
-  const blankFieldHandle = (inputElement, message = "Please complete the form to continue") => {
+  const { nameErr, usernameErr, passwordErr, rePasswordErr, emailErr } =
+    useContext(AuthFormContext);
+
+  const fieldErrHandle = (inputElement, message = "Please complete the form to continue") => {
     inputElement.focus();
     toast.warning(message, {
       hideProgressBar: false,
@@ -19,10 +23,21 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!e.target.name.value) return blankFieldHandle(e.target.name);
-    if (!e.target.username.value) return blankFieldHandle(e.target.username);
-    if (!e.target.password.value) return blankFieldHandle(e.target.password);
-    if (!e.target.repassword.value) return blankFieldHandle(e.target.repassword);
+
+    // Empty Field Error
+    if (!e.target.name.value) return fieldErrHandle(e.target.name);
+    if (!e.target.username.value) return fieldErrHandle(e.target.username);
+    if (!e.target.password.value) return fieldErrHandle(e.target.password);
+    if (!e.target.repassword.value) return fieldErrHandle(e.target.repassword);
+
+    // Validation Errors
+    if (nameErr) return fieldErrHandle(e.target.name, nameErr);
+    if (usernameErr) return fieldErrHandle(e.target.username, usernameErr);
+    if (passwordErr) return fieldErrHandle(e.target.password, passwordErr);
+    if (rePasswordErr) return fieldErrHandle(e.target.repassword, rePasswordErr);
+    if (emailErr) return fieldErrHandle(e.target.email, emailErr);
+
+    console.log("hai");
   };
 
   return (

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import AuthFormContext from "../../context/AuthForm/AuthFormContext";
 import SignUpInput from "./SignUpInput";
 
 export default function NameUsername() {
@@ -13,18 +14,17 @@ export default function NameUsername() {
   const [username, setUsername] = useState("");
 
   // Variables to store input validation errors
-  const [nameErr, setNameErr] = useState("");
-  const [usernameErr, setUsernameErr] = useState("");
+  const { nameErr, setNameErr } = useContext(AuthFormContext);
+  const { usernameErr, setUsernameErr } = useContext(AuthFormContext);
 
   // Onchange handle for name input
   const nameOnChange = (event) => {
     const value = event.target.value;
     setName(value);
 
-    if (value.length < nameMinLen) {
+    if (value.length === 0) return setNameErr("Name shouldn't remain empty");
+    if (value.length < nameMinLen)
       return setNameErr(`Name should atleast contain ${nameMinLen} characters`);
-    }
-
     return setNameErr();
   };
 
@@ -33,16 +33,15 @@ export default function NameUsername() {
     const value = event.target.value;
     setUsername(value);
 
-    if (value.length < usenameMinLen) {
+    if (value.length === 0) return setUsernameErr("Username shouldn't remain empty");
+    if (value.length < usenameMinLen)
       return setUsernameErr(`Username should atleast contain ${usenameMinLen} characters`);
-    }
-
-    if (!/^\w+$/.test(value)) {
+    if (!/^\w+$/.test(value))
       return setUsernameErr("Username should only contain letters, digits & underscores");
-    }
-
     return setUsernameErr();
   };
+
+  useEffect(() => {}, [nameErr, usernameErr]);
 
   return (
     <>
