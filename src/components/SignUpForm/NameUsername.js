@@ -50,6 +50,7 @@ export default function NameUsername() {
       <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
         {/* Name */}
         <SignUpInput
+          autoComplete="name"
           name="name"
           value={name}
           message={nameErr}
@@ -63,6 +64,7 @@ export default function NameUsername() {
 
         {/* UserName */}
         <SignUpInput
+          autoComplete="username"
           name="username"
           value={username}
           message={usernameErr}

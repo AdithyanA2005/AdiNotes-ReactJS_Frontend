@@ -20,6 +20,7 @@ export default function LoginForm() {
         closeHandle={() => setLoginModalActive(false)}
       >
         <input
+          autoComplete="username"
           type="text"
           value={account}
           placeholder="Username or Email"
@@ -27,6 +28,7 @@ export default function LoginForm() {
           onChange={(event) => setAccount(event.target.value)}
         />
         <input
+          autoComplete="current-password"
           type="password"
           value={password}
           placeholder="Password"

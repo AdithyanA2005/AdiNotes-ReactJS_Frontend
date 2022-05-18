@@ -49,6 +49,7 @@ export default function Password() {
       <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
         {/* Password Input */}
         <SignUpInput
+          autoComplete="new-password"
           name="password"
           value={password}
           message={passwordErr}
@@ -62,6 +63,7 @@ export default function Password() {
 
         {/* Re Enter Password Input */}
         <SignUpInput
+          autoComplete="password"
           disabled={!(password && !passwordErr)}
           name="repassword"
           value={rePassword}
