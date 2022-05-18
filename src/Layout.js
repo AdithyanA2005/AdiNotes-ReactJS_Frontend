@@ -23,7 +23,7 @@ export default function Layout() {
           />
           <Navbar />
           <div className="pt-16 min-h-screen flex">
-            <main className="py-4 w-full" id="main-app">
+            <main className="py-4 px-2 w-full" id="main-app">
               <Outlet />
             </main>
           </div>
