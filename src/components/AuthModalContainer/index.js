@@ -10,20 +10,24 @@ export default function AuthModalContainer(props) {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.documentElement.style.overflowY = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.documentElement.style.overflowY = "auto";
+    };
   }, []);
 
   return (
     <>
       <div
         onClick={(event) => !modalRef.current.contains(event.target) && props.closeHandle()}
-        className="z-[1000] fixed top-0 left-0 right-0 h-screen dark:bg-opacity-50 dark:bg-slate-900"
+        className="z-[1000] fixed top-0 left-0 overflow-y-auto right-0 bottom-0 h-screen dark:bg-opacity-50 dark:bg-slate-900"
       >
-        <div ref={modalRef} className="max-w-2xl mt-28 mx-auto">
+        <div ref={modalRef} className="max-w-2xl mt-[10vh] mb-7 mx-auto">
           <Slide
             duration={300}
             direction="down"
-            className=" p-4 mx-2 rounded-xl shadow-lg bg-white dark:bg-slate-800 "
+            className="mb-4 p-4 mx-2 rounded-xl shadow-lg bg-white dark:bg-slate-800 "
           >
             <>
               <h2 className="mb-4 font-bold text-2xl text-slate-700 dark:text-slate-300">
