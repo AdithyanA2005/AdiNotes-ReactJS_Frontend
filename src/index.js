@@ -8,20 +8,23 @@ import NoteState from "./context/Note/NoteState";
 import "./index.css";
 import LoaderState from "./context/Loader/LoaderState";
 import ThemeState from "./context/Theme/ThemeState";
+import AuthFormState from "./context/AuthForm/AuthFormState";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeState>
     <LoaderState>
-      <AuthState>
-        <NoteState>
-          <NoteFormState>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </NoteFormState>
-        </NoteState>
-      </AuthState>
+      <AuthFormState>
+        <AuthState>
+          <NoteState>
+            <NoteFormState>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </NoteFormState>
+          </NoteState>
+        </AuthState>
+      </AuthFormState>
     </LoaderState>
   </ThemeState>
 );
