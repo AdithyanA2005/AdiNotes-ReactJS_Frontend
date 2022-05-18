@@ -23,7 +23,7 @@ export default function AuthModalContainer(props) {
           <Slide
             duration={300}
             direction="down"
-            className="w-full p-4 rounded-xl shadow-lg bg-white dark:bg-slate-800 "
+            className=" p-4 mx-2 rounded-xl shadow-lg bg-white dark:bg-slate-800 "
           >
             <>
               <h2 className="mb-4 font-bold text-2xl text-slate-700 dark:text-slate-300">
