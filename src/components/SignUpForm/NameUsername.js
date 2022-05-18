@@ -23,6 +23,8 @@ export default function NameUsername() {
     setName(value);
 
     if (value.length === 0) return setNameErr("Name shouldn't remain empty");
+    if (!/^[A-Za-z\s]*$/.test(value))
+      return setNameErr("Name should only contain letters and space");
     if (value.length < nameMinLen)
       return setNameErr(`Name should atleast contain ${nameMinLen} characters`);
     return setNameErr();

@@ -6,10 +6,9 @@ import AuthModalContainer from "../AuthModalContainer";
 import Email from "./Email";
 import NameUsername from "./NameUsername";
 import Password from "./Password";
-import SignUpInput from "./SignUpInput";
 
 export default function LoginForm() {
-  const { setSignUpModalActive } = useContext(AuthContext);
+  const { createNewAccount, setSignUpModalActive } = useContext(AuthContext);
   const { nameErr, usernameErr, passwordErr, rePasswordErr, emailErr } =
     useContext(AuthFormContext);
 
@@ -37,13 +36,16 @@ export default function LoginForm() {
     if (rePasswordErr) return fieldErrHandle(e.target.repassword, rePasswordErr);
     if (emailErr) return fieldErrHandle(e.target.email, emailErr);
 
-    console.log("hai");
+    createNewAccount({
+      form: e.target,
+      name: e.target.name.value,
+      username: e.target.username.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    });
   };
 
   return (
-    // PASSWORD_MINIMUM_LENGTH=8
-    // PASSWORD_MAXIMUM_LENGTH=100
-
     <>
       <AuthModalContainer
         onSubmitHandle={handleSubmit}

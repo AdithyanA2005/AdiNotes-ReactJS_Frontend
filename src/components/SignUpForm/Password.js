@@ -1,4 +1,3 @@
-import { isValidDateValue } from "@testing-library/user-event/dist/utils";
 import React, { useState, useEffect, useContext } from "react";
 import AuthFormContext from "../../context/AuthForm/AuthFormContext";
 import SignUpInput from "./SignUpInput";
