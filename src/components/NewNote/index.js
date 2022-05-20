@@ -4,18 +4,15 @@ import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 import InputContainer from "./InputContainer";
 
 export default function CreateNew() {
-  useEffect(() => {
-    const main_app = document.getElementById("main-app");
-    const handleClick = (e) => !formRef.current.contains(e.target) && closeNewNoteForm();
-    main_app.addEventListener("click", handleClick);
-    return () => main_app.removeEventListener("click", handleClick);
-  }, []);
+  // Length config of title and desc
+  const titleMaxLen = process.env.REACT_APP_NOTE_TITLE_MAXIMUM_LENGTH;
+  const titleMinLen = process.env.REACT_APP_NOTE_TITLE_MINIMUM_LENGTH;
+  const descMaxLen = process.env.REACT_APP_NOTE_DESCRIPTION_MAXIMUM_LENGTH;
+  const descMinLen = process.env.REACT_APP_NOTE_DESCRIPTION_MINIMUM_LENGTH;
 
-  const noteTitleRef = useRef();
+  // Context Variables
   const { addNote } = useContext(NoteContext);
   const {
-    NOTE_TITLE_MAXIMUM_LENGTH,
-    NOTE_DESCRIPTION_MAXIMUM_LENGTH,
     formRef,
     noteDescriptionRef,
     openNewNoteForm,
@@ -25,17 +22,59 @@ export default function CreateNew() {
     noteDescription,
     setNoteDescription,
     formExpanded,
+    noteTitleErr,
+    setNoteTitleErr,
+    noteDescriptionErr,
+    setNoteDescriptionErr,
   } = useContext(NoteFormContext);
 
-  const handleEscape = (event) => {
+  // Closes the form if escape key is pressed
+  const handleEscapeOnKeyDown = (event) => {
     if (event.key == "Escape") return closeNewNoteForm();
   };
 
+  // Does the validations on the tile input
+  const titleValidations = (value) => {
+    if (value.length < titleMinLen)
+      return setNoteTitleErr("Title should atleast contain " + titleMinLen + " characters");
+    return setNoteTitleErr("");
+  };
+
+  // Does the validations on the description input
+  const descValidations = (value) => {
+    if (value.length < descMinLen)
+      return setNoteDescriptionErr(
+        "Description should atleast contain " + descMinLen + " characters"
+      );
+    return setNoteDescriptionErr("");
+  };
+
+  // Handle title change
+  const titleOnChangeHandle = (event) => {
+    setNoteTitle(event.target.value);
+    titleValidations(event.target.value);
+  };
+
+  // Handle description change
+  const descOnChangeHandle = (event) => {
+    setNoteDescription(event.target.value);
+    descValidations(event.target.value);
+  };
+
+  // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     addNote(noteTitle, noteDescription);
     closeNewNoteForm();
   };
+
+  // Close the form by clicking outside the form body
+  useEffect(() => {
+    const main_app = document.getElementById("main-app");
+    const handleClick = (e) => !formRef.current.contains(e.target) && closeNewNoteForm();
+    main_app.addEventListener("click", handleClick);
+    return () => main_app.removeEventListener("click", handleClick);
+  }, []);
 
   return (
     <>
@@ -43,47 +82,56 @@ export default function CreateNew() {
         ref={formRef}
         onSubmit={handleFormSubmit}
         className="p-3.5 w-5/6 md:max-w-2xl mx-auto rounded-lg shadow-lg flex flex-col gap-5 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700"
-        method="post"
       >
+        {/* Note Title Input When Expanded */}
         {formExpanded && (
-          <InputContainer length={noteTitle.length} maxLength={NOTE_TITLE_MAXIMUM_LENGTH}>
-            <input
-              onKeyDown={handleEscape}
-              onChange={(event) =>
-                setNoteTitle(event.target.value.slice(0, NOTE_TITLE_MAXIMUM_LENGTH))
-              }
-              value={noteTitle}
-              ref={noteTitleRef}
-              className="flex-1 outline-0 bg-inherit font-medium text-lg text-green-400 placeholder:text-green-400"
-              placeholder="Title"
-              type="text"
-            />
-          </InputContainer>
+          <InputContainer
+            length={{
+              current: noteTitle.length,
+              max: titleMaxLen,
+            }}
+            validationErr={noteTitleErr}
+            value={noteTitle}
+            placeholder="Title"
+            maxLength={titleMaxLen}
+            className="flex-1 outline-0 bg-inherit font-medium text-lg text-green-400 placeholder:text-green-400"
+            onKeyDown={handleEscapeOnKeyDown}
+            onChange={titleOnChangeHandle}
+          />
         )}
 
-        <InputContainer length={noteDescription.length} maxLength={NOTE_DESCRIPTION_MAXIMUM_LENGTH}>
-          <input
-            onKeyDown={handleEscape}
-            onChange={(event) =>
-              setNoteDescription(event.target.value.slice(0, NOTE_DESCRIPTION_MAXIMUM_LENGTH))
+        {/* Take Note Input */}
+        <InputContainer
+          refference={noteDescriptionRef}
+          length={
+            formExpanded && {
+              current: noteDescription.length,
+              max: descMaxLen,
             }
-            onClick={openNewNoteForm}
-            value={noteDescription}
-            ref={noteDescriptionRef}
-            className="flex-1 outline-0 bg-inherit font-normal text-base text-slate-600 dark:text-slate-300 placeholder:text-slate-600 dark:placeholder:text-slate-300"
-            placeholder="Take a note"
-            type="text"
-          />
-        </InputContainer>
+          }
+          validationErr={noteDescriptionErr}
+          value={noteDescription}
+          placeholder="Take a note"
+          maxLength={descMaxLen}
+          className="flex-1 outline-0 bg-inherit font-normal text-base text-slate-600 dark:text-slate-300 placeholder:text-slate-600 dark:placeholder:text-slate-300"
+          onKeyDown={handleEscapeOnKeyDown}
+          onChange={descOnChangeHandle}
+          onClick={openNewNoteForm}
+        />
 
+        {/* Submit and close button when expanded */}
         {formExpanded && (
           <div className="flex justify-between mt-2">
+            {/* Submit Button */}
             <button
               type="submit"
-              className="text-white bg-purple-500 text-sm font-medium rounded-md py-2 px-2.5"
+              disabled={!noteTitle || !noteDescription || noteTitleErr || noteDescriptionErr}
+              className="disabled:cursor-not-allowed disabled:bg-opacity-50 text-white bg-purple-600 text-sm font-medium rounded-md py-2 px-2.5"
             >
               Create Note
             </button>
+
+            {/* Close Button */}
             <button
               onClick={closeNewNoteForm}
               className="text-slate-500 dark:text-slate-400 font-medium dark:text"

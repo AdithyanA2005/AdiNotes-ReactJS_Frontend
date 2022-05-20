@@ -1,12 +1,14 @@
-import axios from "../../axios/index";
+import getAxios from "../../axios/index";
 import React, { useContext, useState } from "react";
 import NoteContext from "./NoteContext";
 import LoaderContext from "../Loader/LoaderContext";
+import AuthContext from "../Auth/AuthContext";
 
 const NoteState = (props) => {
   const { setProgress } = useContext(LoaderContext);
+  const { auth } = useContext(AuthContext);
   const [notes, setNotes] = useState();
-  const [createNewModal, setCreateNewModal] = useState(true);
+  const axios = getAxios(auth?.authToken);
 
   const getNotes = () => {
     setProgress(5);
