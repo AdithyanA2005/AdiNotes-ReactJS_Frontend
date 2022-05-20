@@ -1,9 +1,11 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
 
 export default function SidebarButton({ children, tooltip, isBurger, sidebarActive, ...props }) {
   return (
     <>
+      {/* Sidebar Item Button */}
       <button
         {...props}
         className={`${
@@ -15,19 +17,19 @@ export default function SidebarButton({ children, tooltip, isBurger, sidebarActi
           (sidebarActive ? "rounded-r-3xl w-full pl-2" : "rounded-3xl w-12 hover:rounded-xl")
         } group relative transition-all duration-300 ease-in-out cursor-pointer flex justify-start items-center shadow-lg`}
       >
-        {/* Icon */}
+        {/* Children (Probably the Icon) */}
         <span className={`${isBurger ? "h-11 w-11 p-3" : "h-12 w-12 p-3"} text-center  absolute `}>
           {children}
         </span>
 
-        {/* Tooltip */}
+        {/* Tooltip in sidebar shrik mode*/}
         {tooltip && !sidebarActive && (
           <span className="group-hover:scale-100 absolute w-auto p-2 m-2 min-w-max left-14 rounded-md text-white dark:bg-slate-700 bg-slate-500 text-xs font-bold transition-all duration-100 scale-0 origin-left">
             {tooltip} 💡
           </span>
         )}
 
-        {/* Item Text When sidebar is active */}
+        {/* Item name when sidebar is expanded */}
         {sidebarActive && tooltip && (
           <Slide duration={400} direction="left">
             <Fade duration={1200}>
@@ -41,3 +43,14 @@ export default function SidebarButton({ children, tooltip, isBurger, sidebarActi
     </>
   );
 }
+
+SidebarButton.propTypes = {
+  sidebarActive: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  isBurger: PropTypes.bool,
+  tooltip: PropTypes.string,
+};
+
+SidebarButton.defaultProps = {
+  isBurger: false,
+};

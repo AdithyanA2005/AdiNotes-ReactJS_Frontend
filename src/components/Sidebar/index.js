@@ -1,33 +1,40 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { ReactComponent as AngleUpIcon } from "../../assets/sortup.svg";
+import React, { useContext, useState } from "react";
 import { ReactComponent as BurgerIcon } from "../../assets/burger.svg";
+import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
 import { ReactComponent as NoteIcon } from "../../assets/note.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
-import { ReactComponent as SignOutIcon } from "../../assets/signout.svg";
 import { ReactComponent as SignInIcon } from "../../assets/signin.svg";
+import { ReactComponent as SignOutIcon } from "../../assets/signout.svg";
+import { ReactComponent as AngleUpIcon } from "../../assets/sortup.svg";
 import { ReactComponent as SunIcon } from "../../assets/sun.svg";
-import { ReactComponent as CloseIcon } from "../../assets/close.svg";
-import SidebarButton from "./SidebarButton";
-import SidebarSeperator from "./SidebarSeperator";
 import AuthContext from "../../context/Auth/AuthContext";
 import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 import ThemeContext from "../../context/Theme/ThemeContext";
+import SidebarButton from "./SidebarButton";
+import SidebarSeperator from "./SidebarSeperator";
 
 export default function Sidebar() {
-  const [sidebarActive, setSidebarActive] = useState(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  // Toggle the theme of the entire app (dark / light)
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+
+  // Expands or shinks the sidebar
   const toggleSidebar = () => setSidebarActive((prev) => !prev);
+  const [sidebarActive, setSidebarActive] = useState(false);
+
+  // Scroll Back to Top Of The Page
   const backToTop = () => window.scroll(0, 0);
+
+  const { theme, setTheme } = useContext(ThemeContext);
   const { auth, setLogoutModalActive } = useContext(AuthContext);
   const { getNotes } = useContext(NoteContext);
   const { openNewNoteForm } = useContext(NoteFormContext);
 
   return (
     <>
-      {/* HamBurger */}
+      {/* HAMBURGER */}
+      {/* This is a seperated button for sidebar which is represented as a part of navbar */}
       <div className="z-[100] fixed top-0 left-0 transition-all ease-in-out duration-300 ">
         <div className="p-2.5 -mt-[1px] flex border-b dark:border-slate-700 justify-center items-center bg-white dark:bg-slate-900 ">
           <SidebarButton onClick={toggleSidebar} sidebarActive={sidebarActive} isBurger>
@@ -36,6 +43,7 @@ export default function Sidebar() {
         </div>
       </div>
 
+      {/* SIDEBAR */}
       <div
         className={`${
           sidebarActive ? "w-60" : "w-16"
@@ -44,7 +52,6 @@ export default function Sidebar() {
       >
         <div className="flex flex-col gap-4 p-2.5 pt-5 h-full  bg-white dark:text-white dark:bg-slate-900">
           {/* Create New Note */}
-
           <SidebarButton
             disabled={!auth}
             onClick={openNewNoteForm}
@@ -54,7 +61,7 @@ export default function Sidebar() {
             <PlusIcon />
           </SidebarButton>
 
-          {/* Fetch All Notes */}
+          {/* Re-Fetch All Notes */}
           <SidebarButton
             disabled={!auth}
             onClick={() => getNotes()}
@@ -64,7 +71,7 @@ export default function Sidebar() {
             <NoteIcon />
           </SidebarButton>
 
-          {/* Add Hr */}
+          {/* Add Seperator Line */}
           <SidebarSeperator />
 
           {/* Toggle App Theme */}
@@ -77,11 +84,10 @@ export default function Sidebar() {
             <AngleUpIcon />
           </SidebarButton>
 
-          {/* Add Hr */}
+          {/* Add Seperator Line */}
           <SidebarSeperator />
 
           {/* Sign out */}
-
           <SidebarButton
             disabled={!auth}
             onClick={() => setLogoutModalActive(true)}

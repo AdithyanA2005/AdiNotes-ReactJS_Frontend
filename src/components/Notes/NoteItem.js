@@ -3,14 +3,23 @@ import { ReactComponent as BinIcon } from "../../assets/bin.svg";
 import DeleteModal from "./DeleteModal";
 
 export default function NoteItem({ id, title, description, tag }) {
-  const [noteActive, setNoteActive] = useState(false);
-  const truncate = (text, end) => (text.length > end ? text.slice(0, end) + "..." : text);
+  // Refs
   const deleteRef = useRef();
+
+  // Note Active State
+  const [noteActive, setNoteActive] = useState(false);
+
+  // DeleteModal Active State
   const [deleteModalActive, setDeleteModalActive] = useState(false);
+
+  // Truncate funtion to add ... to big text
+  const truncate = (text, end) => (text.length > end ? text.slice(0, end) + "..." : text);
 
   return (
     <>
+      {/* Asks conformation before deleting a note */}
       {deleteModalActive && <DeleteModal id={id} closeModal={() => setDeleteModalActive(false)} />}
+
       <div className="group w-5/6 min-h-[13rem] md:max-w-[20rem] relative">
         <div
           onMouseOver={(event) => {

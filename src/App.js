@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, Redirect, Navigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import AuthContext from "./context/Auth/AuthContext";
 import Layout from "./Layout";
 import Landing from "./pages/Landing";
-import React, { useContext } from "react";
-import AuthContext from "./context/Auth/AuthContext";
 import Main from "./pages/Main";
 
 export default function App() {
   const { auth, setAuth } = useContext(AuthContext);
 
   useEffect(() => {
+    // Add smooth scroll feature to html
     document.documentElement.classList.add("scroll-smooth");
 
-    if (localStorage.authToken) {
-      setAuth({ authToken: localStorage.authToken });
-    }
+    // Looks if user is already logged in
+    if (localStorage.authToken) setAuth({ authToken: localStorage.authToken });
   }, []);
 
   return (

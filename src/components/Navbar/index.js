@@ -8,6 +8,8 @@ export default function Navbar() {
         <div className="h-full w-full grid place-items-center border-b dark:border-slate-700 bg-white dark:bg-slate-900 ">
           <div className="container px-10 flex items-center justify-center md:justify-between">
             <NavBrand />
+
+            {/* [Get Started / New Note] btn on basis of auth */}
             <StartButton />
           </div>
         </div>

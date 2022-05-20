@@ -7,7 +7,7 @@ export default function Notes({ notes }) {
     <>
       <NotesContainer>
         {notes &&
-          notes.map((note, index) => {
+          notes.map((note) => {
             return (
               <NoteItem
                 key={note._id}
@@ -18,6 +18,9 @@ export default function Notes({ notes }) {
               />
             );
           })}
+
+        {/* TODO: Also add a welcome card */}
+        {/* TODO: Add A + card for creating new note */}
       </NotesContainer>
     </>
   );
