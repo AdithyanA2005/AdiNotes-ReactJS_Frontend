@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/Auth/AuthContext";
 import AuthModalContainer from "../AuthModalContainer";
@@ -16,6 +16,10 @@ export default function LoginForm() {
     loginToAccount(account, password);
   };
 
+  useEffect(() => {
+    document.getElementById("usernameInput").focus();
+  }, []);
+
   return (
     <>
       <AuthModalContainer
@@ -25,6 +29,7 @@ export default function LoginForm() {
       >
         {/* Username */}
         <input
+          id="usernameInput"
           autoComplete="username"
           type="text"
           value={account}

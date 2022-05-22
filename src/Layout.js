@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
+import JumbToMainContent from "./components/Accessibility/JumbToMainContent";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import LoaderContext from "./context/Loader/LoaderContext";
@@ -15,6 +16,9 @@ export default function Layout() {
   return (
     <>
       <div className=" bg-slate-50 dark:bg-slate-800 min-h-screen">
+        {/* A Accesseblity button which apperes on first tab press to go to the main content */}
+        <JumbToMainContent />
+
         <Sidebar />
 
         {/* App Screen */}

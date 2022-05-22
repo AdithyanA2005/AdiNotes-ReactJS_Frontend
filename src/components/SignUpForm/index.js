@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/Auth/AuthContext";
 import AuthFormContext from "../../context/AuthForm/AuthFormContext";

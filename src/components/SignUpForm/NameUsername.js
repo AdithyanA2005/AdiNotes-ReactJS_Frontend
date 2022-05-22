@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthFormContext from "../../context/AuthForm/AuthFormContext";
 import SignUpInput from "./SignUpInput";
 
@@ -43,13 +43,16 @@ export default function NameUsername() {
     return setUsernameErr();
   };
 
-  useEffect(() => {}, [nameErr, usernameErr]);
+  useEffect(() => {
+    document.getElementById("nameInput").focus();
+  }, []);
 
   return (
     <>
       <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
         {/* Name */}
         <SignUpInput
+          id="nameInput"
           autoComplete="name"
           name="name"
           value={name}
