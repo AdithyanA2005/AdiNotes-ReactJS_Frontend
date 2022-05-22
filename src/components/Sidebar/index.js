@@ -35,7 +35,7 @@ export default function Sidebar() {
     <>
       {/* HAMBURGER */}
       {/* This is a seperated button for sidebar which is represented as a part of navbar */}
-      <div className="z-[100] fixed top-0 left-0 transition-all ease-in-out duration-300 ">
+      <div className="z-[41] fixed top-0 left-0 transition-all ease-in-out duration-300 ">
         <div className="p-2.5 -mt-[1px] flex border-b dark:border-slate-700 justify-center items-center bg-white dark:bg-slate-900 ">
           <SidebarButton onClick={toggleSidebar} sidebarActive={sidebarActive} isBurger>
             {sidebarActive ? <CloseIcon /> : <BurgerIcon />}

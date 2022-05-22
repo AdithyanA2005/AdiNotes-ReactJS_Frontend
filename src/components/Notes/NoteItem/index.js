@@ -48,7 +48,7 @@ export default function NoteItem({ id, title, description, tag }) {
           <button
             ref={deleteRef}
             onClick={() => setDeleteModalActive(true)}
-            className="group-hover:scale-100 scale-0 z-50 w-3.5 rounded-tl-xl transition-all duration-300 opacity-70 text-slate-500 hover:opacity-100 hover:text-red-500 hover:w-4"
+            className="group-hover:scale-100 scale-0 w-3.5 rounded-tl-xl transition-all duration-300 opacity-70 text-slate-500 hover:opacity-100 hover:text-red-500 hover:w-4"
           >
             <BinIcon />
           </button>

@@ -5,7 +5,7 @@ import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import { ReactComponent as InfoIcon } from "../../assets/info.svg";
 import NoteContext from "../../context/Note/NoteContext";
 
-export default function DeleteModal(id, closeModal) {
+export default function DeleteModal({ id, closeModal }) {
   // Contexts
   const { deleteNote } = useContext(NoteContext);
 
@@ -17,7 +17,7 @@ export default function DeleteModal(id, closeModal) {
 
   return (
     <>
-      <div className="bg-opacity-10 z-[1000000000] h-full flex items-center bg-slate-800 fixed top-0 left-0 right-0">
+      <div className="bg-opacity-10 z-50 h-full flex items-center bg-slate-800 fixed top-0 left-0 right-0">
         <Zoom duration={300} className="mx-auto">
           <div className="relative p-4 mb-[10vh] w-full max-w-md">
             <div className="relative border border-slate-200 shadow-lg dark:border-slate-600 bg-white rounded-lg dark:bg-slate-700">

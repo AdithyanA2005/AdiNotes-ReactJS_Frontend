@@ -35,7 +35,7 @@ export default function AuthModalContainer({
       {/* Container With Bg change */}
       <div
         onClick={(event) => !modalRef.current.contains(event.target) && closeHandle()}
-        className="z-[1000] fixed top-0 left-0 overflow-y-auto right-0 bottom-0 h-screen dark:bg-opacity-50 dark:bg-slate-900"
+        className="z-50 fixed top-0 left-0 overflow-y-auto right-0 bottom-0 h-screen dark:bg-opacity-50 dark:bg-slate-900"
       >
         {/* Main Modal */}
         <div ref={modalRef} className="max-w-2xl mt-[10vh] mb-7 mx-auto">

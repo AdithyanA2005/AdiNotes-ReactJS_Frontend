@@ -17,7 +17,7 @@ export default function Container({
           ${specialBorder ? "cursor-pointer" : "border border-slate-200 dark:border-slate-600"}
           ${noteActive && !specialBorder && "dark:shadow-purple-400"}
           ${noteActive && specialBorder && "shadow-cyan-400"}
-          ${noteActive && "scale-110 z-40"} 
+          ${noteActive && "scale-110 z-10"} 
         `}
       >
         <div
