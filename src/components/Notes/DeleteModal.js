@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 import { Zoom } from "react-awesome-reveal";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import { ReactComponent as InfoIcon } from "../../assets/info.svg";
@@ -15,12 +17,31 @@ export default function DeleteModal({ id, closeModal }) {
     closeModal();
   };
 
+  // Close the modal when clicked outside of modal
+  const modalRef = useRef();
+  const closeOnOutsideClickHandle = (event) => {
+    if (!modalRef.current.contains(event.target)) return closeModal();
+  };
+
+  // Close Modal On Escape Key Press
+  useEffect(() => {
+    const handleEscapeKeyDown = (event) => event.key === "Escape" && closeModal();
+    document.addEventListener("keydown", handleEscapeKeyDown);
+    return () => document.removeEventListener("keydown", handleEscapeKeyDown);
+  }, []);
+
   return (
     <>
-      <div className="bg-opacity-10 z-50 h-full flex items-center bg-slate-800 fixed top-0 left-0 right-0">
+      <div
+        onClick={closeOnOutsideClickHandle}
+        className="bg-opacity-30 z-50 h-full flex items-center bg-slate-900 fixed top-0 bottom-0 left-0 right-0"
+      >
         <Zoom duration={300} className="mx-auto">
           <div className="relative p-4 mb-[10vh] w-full max-w-md">
-            <div className="relative border border-slate-200 shadow-lg dark:border-slate-600 bg-white rounded-lg dark:bg-slate-700">
+            <div
+              ref={modalRef}
+              className="relative border rounded-lg shadow-lg border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700"
+            >
               {/* X-Icon at top right of modal */}
               <button
                 type="button"
