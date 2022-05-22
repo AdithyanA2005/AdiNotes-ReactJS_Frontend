@@ -12,19 +12,19 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeState>
-    <LoaderState>
-      <AuthFormState>
-        <AuthState>
-          <NoteState>
-            <NoteFormState>
-              <BrowserRouter>
+  <BrowserRouter>
+    <ThemeState>
+      <LoaderState>
+        <AuthFormState>
+          <AuthState>
+            <NoteState>
+              <NoteFormState>
                 <App />
-              </BrowserRouter>
-            </NoteFormState>
-          </NoteState>
-        </AuthState>
-      </AuthFormState>
-    </LoaderState>
-  </ThemeState>
+              </NoteFormState>
+            </NoteState>
+          </AuthState>
+        </AuthFormState>
+      </LoaderState>
+    </ThemeState>
+  </BrowserRouter>
 );

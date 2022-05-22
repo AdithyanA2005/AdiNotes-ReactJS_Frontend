@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import getAxios from "../../axios";
-import AuthContext from "./AuthContext";
-import LoaderContext from "../Loader/LoaderContext";
 import AuthFormContext from "../AuthForm/AuthFormContext";
+import LoaderContext from "../Loader/LoaderContext";
+import AuthContext from "./AuthContext";
 
 const AuthState = (props) => {
   const [auth, setAuth] = useState(null);
