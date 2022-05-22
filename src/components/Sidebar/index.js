@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ReactComponent as BurgerIcon } from "../../assets/burger.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
