@@ -13,10 +13,11 @@ export default function Container({
     <>
       <div
         onClick={onClickHandle}
-        className={`group overflow-hidden relative w-5/6 min-h-[13rem] md:max-w-[20rem] rounded-md shadow-sm bg-white dark:bg-slate-700 transition-all ease-in-out duration-500
-          ${noteActive && "scale-110 z-40 dark:shadow-purple-400"} 
-          ${specialBorder && "cursor-pointer"}
-          ${!specialBorder && "border border-slate-200 dark:border-slate-600"}
+        className={`group overflow-hidden relative w-full md:w-[49%] min-h-[13rem] md:max-w-[19.3rem] rounded-md shadow-md bg-white dark:bg-slate-700 transition-all ease-in-out duration-500
+          ${specialBorder ? "cursor-pointer" : "border border-slate-200 dark:border-slate-600"}
+          ${noteActive && !specialBorder && "dark:shadow-purple-400"}
+          ${noteActive && specialBorder && "shadow-cyan-400"}
+          ${noteActive && "scale-110 z-40"} 
         `}
       >
         <div
