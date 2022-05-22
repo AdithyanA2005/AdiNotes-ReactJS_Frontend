@@ -70,10 +70,22 @@ export default function CreateNew() {
 
   // Close the form by clicking outside the form body
   useEffect(() => {
+    // Close the form by clicking outside the form body
     const main_app = document.getElementById("main-app");
     const handleClick = (e) => !formRef.current.contains(e.target) && closeNewNoteForm();
     main_app.addEventListener("click", handleClick);
-    return () => main_app.removeEventListener("click", handleClick);
+
+    // Open Form by pressing keycombination `ctrl + ;`
+    const handleKeyDown = (event) => {
+      if (event.key.length !== 1) return;
+      if (event.key.toUpperCase() === ";" && event.ctrlKey) return openNewNoteForm();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      main_app.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (
@@ -102,13 +114,12 @@ export default function CreateNew() {
 
         {/* Take Note Input */}
         <InputContainer
+          keyComb={["Ctrl", ";"]}
           refference={noteDescriptionRef}
-          length={
-            formExpanded && {
-              current: noteDescription.length,
-              max: descMaxLen,
-            }
-          }
+          length={{
+            current: noteDescription.length,
+            max: descMaxLen,
+          }}
           validationErr={noteDescriptionErr}
           value={noteDescription}
           placeholder="Take a note"

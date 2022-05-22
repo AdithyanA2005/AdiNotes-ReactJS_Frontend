@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 
-export default function InputContainer({ length, refference, validationErr, ...props }) {
+export default function InputContainer({ length, refference, validationErr, keyComb, ...props }) {
   const { formExpanded } = useContext(NoteFormContext);
   return (
     <>
@@ -12,9 +12,18 @@ export default function InputContainer({ length, refference, validationErr, ...p
           }`}
         >
           <input ref={refference} type="text" {...props} />
-          <span className="font-semibold text-xs pl-1.5 pt-1.5 pr-0.5 pb-0.5 text-slate-600 dark:text-slate-50">
-            {length && `${length.current}/${length.max}`}
-          </span>
+
+          {!formExpanded && keyComb && (
+            <span className="absolute right-3 font-bold text-xs px-2.5 py-1.5 rounded-md text-slate-600 dark:text-white dark:bg-slate-600">
+              {keyComb.join(" + ")}
+            </span>
+          )}
+
+          {formExpanded && (
+            <span className="font-semibold text-xs pl-1.5 pt-1.5 pr-0.5 pb-0.5 text-slate-600 dark:text-slate-50">
+              {length && `${length.current}/${length.max}`}
+            </span>
+          )}
         </div>
         {formExpanded && validationErr && (
           <span className="text-red-400 text-sm pl-2">{validationErr}</span>
