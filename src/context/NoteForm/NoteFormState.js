@@ -5,6 +5,7 @@ const NoteFormState = (props) => {
   const [formExpanded, setFormExpanded] = useState(false);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteDescription, setNoteDescription] = useState("");
+  const [noteTag, setNoteTag] = useState("General");
   const [noteTitleErr, setNoteTitleErr] = useState("");
   const [noteDescriptionErr, setNoteDescriptionErr] = useState("");
   const noteDescriptionRef = useRef();
@@ -21,6 +22,7 @@ const NoteFormState = (props) => {
     setNoteDescription("");
     setNoteTitleErr("");
     setNoteDescriptionErr("");
+    setNoteTag("General");
     noteDescriptionRef.current.blur();
   };
 
@@ -37,6 +39,8 @@ const NoteFormState = (props) => {
         setNoteTitle,
         noteDescription,
         setNoteDescription,
+        noteTag,
+        setNoteTag,
         noteTitleErr,
         setNoteTitleErr,
         noteDescriptionErr,

@@ -21,6 +21,7 @@ const NoteState = (props) => {
 
   const addNote = (title, description, tag = undefined) => {
     setProgress(5);
+    if (!tag) tag = "General";
     axios
       .post("/notes/addnote", {
         title: title,

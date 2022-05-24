@@ -3,6 +3,7 @@ import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 import { OPEN_NEW_NOTE_FORM_KEY } from "../KeyboardShortcuts/ShortCutList";
 import InputContainer from "./InputContainer";
+import TagInput from "./TagInput";
 
 export default function CreateNew() {
   // Length config of title and desc
@@ -18,6 +19,8 @@ export default function CreateNew() {
     noteDescriptionRef,
     openNewNoteForm,
     closeNewNoteForm,
+    noteTag,
+    setNoteTag,
     noteTitle,
     setNoteTitle,
     noteDescription,
@@ -62,10 +65,20 @@ export default function CreateNew() {
     descValidations(event.target.value);
   };
 
+  // Handle tag change
+  const handleTagOnChange = (event) => {
+    setNoteTag(event.target.value);
+  };
+
+  // Handle tag clear
+  const clearTagHandle = (event) => {
+    setNoteTag("General");
+  };
+
   // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    addNote(noteTitle, noteDescription);
+    addNote(noteTitle, noteDescription, noteTag);
     closeNewNoteForm();
   };
 
@@ -119,6 +132,16 @@ export default function CreateNew() {
           onChange={descOnChangeHandle}
           onClick={openNewNoteForm}
         />
+
+        {/* Show tag input when form is expanded */}
+        {formExpanded && (
+          <TagInput
+            closeBtnHandle={clearTagHandle}
+            value={noteTag}
+            onChange={handleTagOnChange}
+            maxLength={15}
+          />
+        )}
 
         {/* Submit and close button when expanded */}
         {formExpanded && (
