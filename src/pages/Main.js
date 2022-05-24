@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import AuthenticatedShortcuts from "../components/KeyboardShortcuts/AuthenticatedShortcuts";
 import LogoutForm from "../components/LogoutForm";
 import NewNoteForm from "../components/NewNote";
 import Notes from "../components/Notes";
@@ -16,17 +17,19 @@ export default function Main() {
   }, []);
 
   return (
-    <>
-      {/* Conform Logout Modal */}
-      {logoutModalActive && <LogoutForm />}
+    <AuthenticatedShortcuts>
+      <>
+        {/* Conform Logout Modal */}
+        {logoutModalActive && <LogoutForm />}
 
-      <div className="flex flex-col gap-7">
-        {/* Form to create new Note */}
-        <NewNoteForm />
+        <div className="flex flex-col gap-7">
+          {/* Form to create new Note */}
+          <NewNoteForm />
 
-        {/* List of notes */}
-        <Notes notes={notes} />
-      </div>
-    </>
+          {/* List of notes */}
+          <Notes notes={notes} />
+        </div>
+      </>
+    </AuthenticatedShortcuts>
   );
 }
