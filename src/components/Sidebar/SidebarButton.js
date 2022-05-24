@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import SidebarContext from "../../context/Sidebar/SidebarContext";
 import ItemName from "./ItemName";
 import Tooltip from "./Tooltip";
 
-export default function SidebarButton({ children, tooltip, isBurger, sidebarActive, ...props }) {
+export default function SidebarButton({ children, tooltip, isBurger, ...props }) {
+  const { sidebarActive } = useContext(SidebarContext);
   return (
     <>
       {/* Sidebar Item Button */}
@@ -37,7 +40,6 @@ export default function SidebarButton({ children, tooltip, isBurger, sidebarActi
 }
 
 SidebarButton.propTypes = {
-  sidebarActive: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   isBurger: PropTypes.bool,
   tooltip: PropTypes.string,

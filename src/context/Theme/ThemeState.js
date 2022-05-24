@@ -3,6 +3,9 @@ import ThemeContext from "./ThemeContext";
 
 const ThemeState = (props) => {
   const [theme, setTheme] = useState("dark");
+  // Toggle the theme of the entire app (dark / light)
+  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+
   const autoCompleteInputTheme = (theme) => {
     return document.documentElement.style.setProperty(
       "--input-text-color",
@@ -22,7 +25,9 @@ const ThemeState = (props) => {
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>{props.children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+      {props.children}
+    </ThemeContext.Provider>
   );
 };
 

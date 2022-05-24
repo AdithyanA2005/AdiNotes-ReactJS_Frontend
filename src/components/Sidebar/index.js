@@ -11,22 +11,16 @@ import { ReactComponent as SunIcon } from "../../assets/sun.svg";
 import AuthContext from "../../context/Auth/AuthContext";
 import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
+import SidebarContext from "../../context/Sidebar/SidebarContext";
 import ThemeContext from "../../context/Theme/ThemeContext";
 import SidebarButton from "./SidebarButton";
 import SidebarSeperator from "./SidebarSeperator";
 
 export default function Sidebar() {
-  // Toggle the theme of the entire app (dark / light)
-  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-
-  // Expands or shinks the sidebar
-  const toggleSidebar = () => setSidebarActive((prev) => !prev);
-  const [sidebarActive, setSidebarActive] = useState(false);
-
   // Scroll Back to Top Of The Page
   const backToTop = () => window.scroll(0, 0);
-
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { sidebarActive, setSidebarActive, toggleSidebar } = useContext(SidebarContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { auth, setLogoutModalActive } = useContext(AuthContext);
   const { getNotes } = useContext(NoteContext);
   const { openNewNoteForm } = useContext(NoteFormContext);
@@ -37,7 +31,7 @@ export default function Sidebar() {
       {/* This is a seperated button for sidebar which is represented as a part of navbar */}
       <div className="z-[41] fixed top-0 left-0 transition-all ease-in-out duration-300 ">
         <div className="p-2.5 -mt-[1px] flex border-b dark:border-slate-700 justify-center items-center bg-white dark:bg-slate-900 ">
-          <SidebarButton onClick={toggleSidebar} sidebarActive={sidebarActive} isBurger>
+          <SidebarButton title="Ctrl + ." onClick={toggleSidebar} isBurger>
             {sidebarActive ? <CloseIcon /> : <BurgerIcon />}
           </SidebarButton>
         </div>
@@ -52,22 +46,12 @@ export default function Sidebar() {
       >
         <div className="flex flex-col gap-4 p-2.5 pt-5 h-full  bg-white dark:text-white dark:bg-slate-900">
           {/* Create New Note */}
-          <SidebarButton
-            disabled={!auth}
-            onClick={openNewNoteForm}
-            sidebarActive={sidebarActive}
-            tooltip="New Note"
-          >
+          <SidebarButton disabled={!auth} onClick={openNewNoteForm} tooltip="New Note">
             <PlusIcon />
           </SidebarButton>
 
           {/* Re-Fetch All Notes */}
-          <SidebarButton
-            disabled={!auth}
-            onClick={() => getNotes()}
-            sidebarActive={sidebarActive}
-            tooltip="Refresh All Notes"
-          >
+          <SidebarButton disabled={!auth} onClick={() => getNotes()} tooltip="Refresh All Notes">
             <NoteIcon />
           </SidebarButton>
 
@@ -75,12 +59,12 @@ export default function Sidebar() {
           <SidebarSeperator />
 
           {/* Toggle App Theme */}
-          <SidebarButton sidebarActive={sidebarActive} onClick={toggleTheme} tooltip="Toggle Theme">
+          <SidebarButton onClick={toggleTheme} tooltip="Toggle Theme">
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </SidebarButton>
 
           {/* Go to top of page */}
-          <SidebarButton sidebarActive={sidebarActive} onClick={backToTop} tooltip="Back To Top">
+          <SidebarButton onClick={backToTop} tooltip="Back To Top">
             <AngleUpIcon />
           </SidebarButton>
 
@@ -91,7 +75,6 @@ export default function Sidebar() {
           <SidebarButton
             disabled={!auth}
             onClick={() => setLogoutModalActive(true)}
-            sidebarActive={sidebarActive}
             tooltip="Sign Out"
           >
             {auth ? <SignOutIcon /> : <SignInIcon />}

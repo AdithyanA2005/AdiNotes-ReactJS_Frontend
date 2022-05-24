@@ -14,7 +14,10 @@ export default function InputContainer({ length, refference, validationErr, keyC
           <input ref={refference} type="text" {...props} />
 
           {!formExpanded && keyComb && (
-            <span className="absolute right-3 font-bold text-xs px-2.5 py-1.5 rounded-md text-slate-600 dark:text-white dark:bg-slate-600">
+            <span
+              title="Open New Note Form"
+              className="absolute right-3 font-bold text-xs px-2.5 py-1.5 rounded-md text-slate-600 dark:text-white dark:bg-slate-600"
+            >
               {keyComb.join(" + ")}
             </span>
           )}
