@@ -15,7 +15,12 @@ const AuthState = (props) => {
   const axios = getAxios();
 
   useEffect(() => {
-    // Sets the authToken in localstorage to the recently logged in users authToken
+    // Looks for a logged in user in localStorage
+    if (localStorage.authToken) setAuth({ authToken: localStorage.authToken });
+  }, []);
+
+  useEffect(() => {
+    // Sets the authToken in localstorage on user login
     if (auth) localStorage.authToken = auth.authToken;
   }, [auth]);
 

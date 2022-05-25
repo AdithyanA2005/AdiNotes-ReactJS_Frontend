@@ -20,9 +20,8 @@ export default function Layout() {
         <JumbToMainContent />
 
         <Sidebar />
-
-        {/* App Screen */}
         <div className="ml-16">
+          {/* Top loading bar */}
           <LoadingBar
             progress={progress}
             color="rgb(168 85 247)"
@@ -30,7 +29,7 @@ export default function Layout() {
           />
           <Navbar />
 
-          {/* Main */}
+          {/* MAIN APP */}
           <div className="pt-16 min-h-screen flex">
             <main className="py-4 px-2 w-full" id="main-app">
               <Outlet />
