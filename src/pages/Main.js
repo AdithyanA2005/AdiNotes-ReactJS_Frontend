@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import AuthenticatedShortcuts from "../components/KeyboardShortcuts/AuthenticatedShortcuts";
 import LogoutForm from "../components/LogoutForm";
-import NewNoteForm from "../components/NewNote";
+import NewNoteForm from "../components/NoteForm";
 import Notes from "../components/Notes";
 import AuthContext from "../context/Auth/AuthContext";
 import NoteContext from "../context/Note/NoteContext";

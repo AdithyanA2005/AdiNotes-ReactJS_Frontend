@@ -1,13 +1,18 @@
+import { useContext } from "react";
+import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 import AddNewNote from "./AddNewNote";
 import NoteItem from "./NoteItem";
 import NotesContainer from "./NotesContainer";
 
 export default function Notes({ notes }) {
+  const { openUpdateNoteForm } = useContext(NoteFormContext);
+
   return (
     <>
       <NotesContainer>
         {/* New Note Card */}
         <AddNewNote />
+        {/* {updateFormExpanded && <UpdateNoteForm />} */}
 
         {/* User Specific Note */}
         {notes &&
@@ -19,6 +24,7 @@ export default function Notes({ notes }) {
                 title={note.title}
                 description={note.description}
                 tag={note.tag}
+                openUpdateNoteHandle={() => openUpdateNoteForm(note)}
               />
             );
           })}

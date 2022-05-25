@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import NoteContext from "./NoteContext";
 import LoaderContext from "../Loader/LoaderContext";
 import AuthContext from "../Auth/AuthContext";
+import NoteFormContext from "../NoteForm/NoteFormContext";
 
 const NoteState = (props) => {
   const { setProgress } = useContext(LoaderContext);
@@ -35,6 +36,24 @@ const NoteState = (props) => {
       });
   };
 
+  const updateNote = (id, title, description, tag = undefined) => {
+    setProgress(5);
+    console.log(id);
+    if (!tag) tag = "General";
+    axios
+      .put(`/notes/updatenote/${id}`, {
+        title: title,
+        description: description,
+        tag: tag,
+      })
+      .then((res) => {
+        setProgress(50);
+        // setNotes(notes.filter((note) => note._id !== id));
+        setNotes([res.data, ...notes.filter((note) => note._id !== id)]);
+        setProgress(100);
+      });
+  };
+
   const deleteNote = (id) => {
     setProgress(5);
     axios
@@ -52,7 +71,7 @@ const NoteState = (props) => {
   };
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, getNotes }}>
+    <NoteContext.Provider value={{ notes, setNotes, addNote, updateNote, deleteNote, getNotes }}>
       {props.children}
     </NoteContext.Provider>
   );

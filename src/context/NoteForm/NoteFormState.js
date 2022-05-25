@@ -3,6 +3,8 @@ import NoteFormContext from "./NoteFormContext";
 
 const NoteFormState = (props) => {
   const [formExpanded, setFormExpanded] = useState(false);
+  const [isUpdateForm, setIsUpdateForm] = useState(false);
+  const [noteId, setNoteId] = useState(null);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteDescription, setNoteDescription] = useState("");
   const [noteTag, setNoteTag] = useState("General");
@@ -12,8 +14,20 @@ const NoteFormState = (props) => {
   const formRef = useRef();
 
   const openNewNoteForm = () => {
+    if (!formExpanded) noteDescriptionRef.current.focus();
     setFormExpanded(true);
-    if (!formExpanded) return noteDescriptionRef.current.focus();
+    setIsUpdateForm(false);
+    setNoteId(null);
+  };
+
+  const openUpdateNoteForm = (note) => {
+    if (!formExpanded) noteDescriptionRef.current.focus();
+    setIsUpdateForm(true);
+    setFormExpanded(true);
+    setNoteTitle(note.title);
+    setNoteDescription(note.description);
+    setNoteTag(note.tag);
+    setNoteId(note._id);
   };
 
   const closeNewNoteForm = () => {
@@ -23,6 +37,8 @@ const NoteFormState = (props) => {
     setNoteTitleErr("");
     setNoteDescriptionErr("");
     setNoteTag("General");
+    setIsUpdateForm(false);
+    setNoteId(null);
     noteDescriptionRef.current.blur();
   };
 
@@ -31,10 +47,15 @@ const NoteFormState = (props) => {
       value={{
         formRef,
         noteDescriptionRef,
+        isUpdateForm,
+        setIsUpdateForm,
+        openUpdateNoteForm,
         openNewNoteForm,
         closeNewNoteForm,
         formExpanded,
         setFormExpanded,
+        noteId,
+        setNoteId,
         noteTitle,
         setNoteTitle,
         noteDescription,

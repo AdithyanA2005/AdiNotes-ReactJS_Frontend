@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { ReactComponent as BinIcon } from "../../../assets/bin.svg";
+import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
 import DeleteModal from "../DeleteModal";
 import Container from "./Container";
 
-export default function NoteItem({ id, title, description, tag }) {
+export default function NoteItem({ id, title, description, tag, openUpdateNoteHandle }) {
   // Refs
-  const deleteRef = useRef();
 
   // Note Active State
   const [noteActive, setNoteActive] = useState(false);
@@ -16,20 +16,14 @@ export default function NoteItem({ id, title, description, tag }) {
   // Truncate funtion to add ... to big text
   const truncate = (text, end) => (text.length > end ? text.slice(0, end) + "..." : text);
 
-  const mouseOverHandle = (event) => {
-    if (deleteRef.current.contains(event.target)) return;
-    return setNoteActive(true);
-  };
-
-  const mouseLeaveHandle = () => setNoteActive(false);
-
   return (
     <>
       {/* Asks conformation before deleting a note */}
       {deleteModalActive && <DeleteModal id={id} closeModal={() => setDeleteModalActive(false)} />}
       <Container
-        mouseOverHandle={mouseOverHandle}
-        mouseLeaveHandle={mouseLeaveHandle}
+        mouseOverHandle={() => setNoteActive(true)}
+        mouseLeaveHandle={() => setNoteActive(false)}
+        openUpdateNoteHandle={openUpdateNoteHandle}
         noteActive={noteActive}
       >
         <h1 className="text-green-400 dark:text-green-400 font-semibold text-lg break-words">
@@ -45,13 +39,21 @@ export default function NoteItem({ id, title, description, tag }) {
             </span>
           </div>
 
-          <button
-            ref={deleteRef}
-            onClick={() => setDeleteModalActive(true)}
-            className="group-hover:scale-100 scale-0 w-3.5 hover:w-4 transition-all duration-300 opacity-70 hover:opacity-100 text-slate-500 hover:text-red-500"
-          >
-            <BinIcon />
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={openUpdateNoteHandle}
+              className="group-hover:scale-100 scale-0 w-4 hover:w-[18px] transition-all duration-300 opacity-70 hover:opacity-100 text-slate-500 hover:text-purple-500"
+            >
+              <EditIcon />
+            </button>
+
+            <button
+              onClick={() => setDeleteModalActive(true)}
+              className="group-hover:scale-100 scale-0 w-3.5 hover:w-4 transition-all duration-300 opacity-70 hover:opacity-100 text-slate-500 hover:text-red-500"
+            >
+              <BinIcon />
+            </button>
+          </div>
         </div>
       </Container>
     </>

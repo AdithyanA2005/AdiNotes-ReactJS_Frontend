@@ -13,12 +13,14 @@ export default function CreateNew() {
   const descMinLen = process.env.REACT_APP_NOTE_DESCRIPTION_MINIMUM_LENGTH;
 
   // Context Variables
-  const { addNote } = useContext(NoteContext);
+  const { addNote, updateNote } = useContext(NoteContext);
   const {
     formRef,
     noteDescriptionRef,
+    isUpdateForm,
     openNewNoteForm,
     closeNewNoteForm,
+    noteId,
     noteTag,
     setNoteTag,
     noteTitle,
@@ -78,7 +80,8 @@ export default function CreateNew() {
   // Handle form submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    addNote(noteTitle, noteDescription, noteTag);
+    if (!isUpdateForm) await addNote(noteTitle, noteDescription, noteTag);
+    if (isUpdateForm) await updateNote(noteId, noteTitle, noteDescription, noteTag);
     closeNewNoteForm();
   };
 
