@@ -1,2 +1,2 @@
-export const OPEN_NEW_NOTE_FORM_KEY = ";";
-export const TOGGLE_SIDEBAR = ".";
+export const OPEN_NEW_NOTE_WITH_KEY = ";";
+export const TOGGLE_SIDEBAR_WITH_KEY = ".";

@@ -20,6 +20,8 @@ export default function Layout() {
         <JumbToMainContent />
 
         <Sidebar />
+        <Navbar />
+
         <div className="ml-16">
           {/* Top loading bar */}
           <LoadingBar
@@ -27,7 +29,6 @@ export default function Layout() {
             color="rgb(168 85 247)"
             onLoaderFinished={() => setProgress(0)}
           />
-          <Navbar />
 
           {/* MAIN APP */}
           <div className="pt-16 min-h-screen flex">

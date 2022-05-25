@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
-import { OPEN_NEW_NOTE_FORM_KEY } from "../KeyboardShortcuts/ShortCutList";
+import { OPEN_NEW_NOTE_WITH_KEY } from "../KeyboardShortcuts/ShortCutList";
 import InputContainer from "./InputContainer";
 import TagInput from "./TagInput";
 
@@ -120,7 +120,7 @@ export default function CreateNew() {
 
         {/* Take Note Input */}
         <InputContainer
-          keyComb={["Ctrl", OPEN_NEW_NOTE_FORM_KEY]}
+          keyComb={["Ctrl", OPEN_NEW_NOTE_WITH_KEY]}
           refference={noteDescriptionRef}
           length={{
             current: noteDescription.length,
