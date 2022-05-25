@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
-import React from "react";
 
 export default function Container({
   children,
   mouseOverHandle,
   mouseLeaveHandle,
   openUpdateNoteHandle,
-  noteActive,
   specialBorder,
   onClickHandle,
 }) {
@@ -15,18 +13,18 @@ export default function Container({
       <div
         onClick={onClickHandle}
         onDoubleClick={openUpdateNoteHandle}
-        className={`group overflow-hidden relative w-full md:w-[49%] min-h-[13rem] md:max-w-[19.3rem] rounded-md shadow-md bg-white dark:bg-slate-700 transition-all ease-in-out duration-500
+        className={`group overflow-hidden hover:scale-110 hover:z-10 relative w-full md:w-[49%] min-h-[13rem] md:max-w-[19.3rem] transition-all ease-in-out duration-500 rounded-md shadow-md hover:shadow-cyan-300 dark:hover:shadow-cyan-400 bg-white dark:bg-slate-700
           ${specialBorder ? "cursor-pointer" : "border border-slate-200 dark:border-slate-600"}
-          ${noteActive && !specialBorder && "dark:shadow-purple-400"}
-          ${noteActive && specialBorder && "shadow-cyan-400"}
-          ${noteActive && "scale-110 z-10"} 
         `}
       >
+        {/* A simple background div which will act as a border for the special card  */}
         <div
           className={`
           absolute -top-24 -bottom-24 -left-24 -right-24 group-hover:animate-spin
           ${specialBorder && "bg-gradient-to-r from-green-500 via-cyan-500 to-emerald-400"}`}
-        ></div>
+        />
+
+        {/* Main Card */}
         <div
           onMouseOver={mouseOverHandle}
           onMouseLeave={mouseLeaveHandle}

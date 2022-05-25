@@ -10,9 +10,8 @@ export default function Notes({ notes }) {
   return (
     <>
       <NotesContainer>
-        {/* New Note Card */}
+        {/* New Note Form */}
         <AddNewNote />
-        {/* {updateFormExpanded && <UpdateNoteForm />} */}
 
         {/* User Specific Note */}
         {notes &&
