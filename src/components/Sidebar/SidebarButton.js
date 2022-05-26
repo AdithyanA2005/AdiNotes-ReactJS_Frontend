@@ -1,28 +1,64 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 import SidebarContext from "../../context/Sidebar/SidebarContext";
 import Tooltip from "../Tooltip";
 import ItemName from "./ItemName";
 
 export default function SidebarButton({ children, tooltip, isDisabled, onClickHandle }) {
+  // Contexts
   const { sidebarExpanded } = useContext(SidebarContext);
+
+  // Only allow onClick function to run if button is not disabled
+  const filteredOnClickHandle = () => {
+    if (isDisabled)
+      return toast.info("Please login to access it", {
+        autoClose: 1000,
+        hideProgressBar: false,
+      });
+    return onClickHandle();
+  };
+
+  // Button Classes
+  const getButtonClasses = () => {
+    const classes = [];
+
+    // The base classes
+    classes.push(
+      "group relative h-12 shadow-lg flex justify-start items-center transition-all duration-300 ease-in-out text-green-500 bg-slate-50 dark:text-green-500 dark:bg-slate-800"
+    );
+
+    // Classes according to disabled state
+    if (isDisabled) classes.push("cursor-not-allowed");
+    else
+      classes.push(
+        "cursor-pointer hover:text-white dark:hover:text-white hover:bg-green-500 dark:hover:bg-green-500"
+      );
+
+    // Classes according to sidebar expanded state
+    if (sidebarExpanded) classes.push("rounded-r-3xl w-full pl-2");
+    else classes.push("rounded-3xl w-12 ");
+
+    // If button is disabled and sidebar is not expanded
+    if (!isDisabled && !sidebarExpanded) classes.push(" hover:rounded-xl");
+
+    // Finally returning a conjoinedd string
+    return classes.join(" ");
+  };
+  const buttonClasses = getButtonClasses();
 
   return (
     <>
-      <button
-        disabled={isDisabled}
-        onClick={onClickHandle}
-        className={`${
-          sidebarExpanded ? "rounded-r-3xl w-full pl-2" : "rounded-3xl w-12 hover:rounded-xl"
-        } group relative transition-all duration-300 ease-in-out cursor-pointer flex justify-start items-center shadow-lg h-12 dark:bg-slate-800 dark:text-green-500 dark:hover:bg-green-500 dark:hover:text-white text-green-500 bg-slate-50 hover:bg-green-500 hover:text-white`}
-      >
+      <button onClick={filteredOnClickHandle} className={buttonClasses}>
         {/* Children (Probably the Icon) */}
         <span className="h-12 w-12 p-[0.825rem] flex items-center justify-center absolute">
           {children}
         </span>
 
-        {/* Tooltip in sidebar collapse mode or for burger*/}
-        {tooltip && !sidebarExpanded && <Tooltip text={`${tooltip} 💡`} />}
+        {/* Tooltip in sidebar collapse mode */}
+        {tooltip && !sidebarExpanded && (
+          <Tooltip text={`${tooltip} ${isDisabled ? "| Please login to access " : ""} 💡`} />
+        )}
 
         {/* Item name when sidebar is expanded */}
         {sidebarExpanded && tooltip && <ItemName text={tooltip} />}

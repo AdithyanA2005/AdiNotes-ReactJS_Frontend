@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import SidebarContext from "./SidebarContext";
 
 const SidebarState = (props) => {
-  // Expands or shinks the sidebar
-  const toggleSidebar = () => setSidebarExpanded((prev) => !prev);
+  // Sidebar expanded status
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
+
+  // Toggle sidebar expand / collapse
+  const toggleSidebar = () => setSidebarExpanded((prev) => !prev);
 
   return (
     <SidebarContext.Provider value={{ sidebarExpanded, setSidebarExpanded, toggleSidebar }}>
