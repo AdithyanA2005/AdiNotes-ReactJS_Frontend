@@ -3,11 +3,11 @@ import SidebarContext from "./SidebarContext";
 
 const SidebarState = (props) => {
   // Expands or shinks the sidebar
-  const toggleSidebar = () => setSidebarActive((prev) => !prev);
-  const [sidebarActive, setSidebarActive] = useState(false);
+  const toggleSidebar = () => setSidebarExpanded((prev) => !prev);
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
 
   return (
-    <SidebarContext.Provider value={{ sidebarActive, setSidebarActive, toggleSidebar }}>
+    <SidebarContext.Provider value={{ sidebarExpanded, setSidebarExpanded, toggleSidebar }}>
       {props.children}
     </SidebarContext.Provider>
   );

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ReactComponent as BurgerIcon } from "../../assets/burger.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
-import SidebarContext from "../../context/Sidebar/SidebarContext";
 import Tooltip from "../Tooltip";
+import SidebarContext from "../../context/Sidebar/SidebarContext";
 import { TOGGLE_SIDEBAR_WITH_KEY } from "../KeyboardShortcuts/ShortCutList";
 
 export default function HamBurger() {

@@ -18,17 +18,16 @@ export default function Layout() {
       <div className=" bg-slate-50 dark:bg-slate-800 min-h-screen">
         {/* A Accesseblity button which apperes on first tab press to go to the main content */}
         <JumbToMainContent />
-
-        <Sidebar />
+        <LoadingBar
+          progress={progress}
+          color="rgb(168 85 247)"
+          onLoaderFinished={() => setProgress(0)}
+        />
         <Navbar />
+        <Sidebar />
 
         <div className="ml-16">
           {/* Top loading bar */}
-          <LoadingBar
-            progress={progress}
-            color="rgb(168 85 247)"
-            onLoaderFinished={() => setProgress(0)}
-          />
 
           {/* MAIN APP */}
           <div className="pt-16 min-h-screen flex">

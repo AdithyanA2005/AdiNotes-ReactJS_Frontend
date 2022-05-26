@@ -1,6 +1,4 @@
-import { useContext, useState } from "react";
-import { ReactComponent as BurgerIcon } from "../../assets/burger.svg";
-import { ReactComponent as CloseIcon } from "../../assets/close.svg";
+import { useContext } from "react";
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
 import { ReactComponent as NoteIcon } from "../../assets/note.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
@@ -17,34 +15,41 @@ import SidebarButton from "./SidebarButton";
 import SidebarSeperator from "./SidebarSeperator";
 
 export default function Sidebar() {
+  // Contexts
+  const { sidebarExpanded, setSidebarExpanded } = useContext(SidebarContext);
+  const { auth, setLogoutModalActive } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { openNewNoteForm } = useContext(NoteFormContext);
+  const { getNotes } = useContext(NoteContext);
+
   // Scroll Back to Top Of The Page
   const backToTop = () => window.scroll(0, 0);
-  const { sidebarActive, setSidebarActive, toggleSidebar } = useContext(SidebarContext);
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { auth, setLogoutModalActive } = useContext(AuthContext);
-  const { getNotes } = useContext(NoteContext);
-  const { openNewNoteForm } = useContext(NoteFormContext);
+
+  // Set sidebar not expanded
+  const handleSidebarMouseLeave = () => {
+    setSidebarExpanded(false);
+  };
 
   return (
     <>
-      {/* HAMBURGER */}
-      {/* This is a seperated button for sidebar which is represented as a part of navbar */}
-
-      {/* SIDEBAR */}
       <div
         className={`${
-          sidebarActive ? "w-60" : "w-16"
+          sidebarExpanded ? "w-60" : "w-16"
         } z-40 fixed transition-all ease-in-out duration-300 h-screen max-h-screen top-0 left-0 mt-16 shadow-lg`}
-        onMouseLeave={() => setSidebarActive(false)}
+        onMouseLeave={handleSidebarMouseLeave}
       >
         <div className="flex flex-col gap-4 p-2.5 pt-5 h-full  bg-white dark:text-white dark:bg-slate-900">
           {/* Create New Note */}
-          <SidebarButton disabled={!auth} onClick={openNewNoteForm} tooltip="New Note">
+          <SidebarButton isDisabled={!auth} onClickHandle={openNewNoteForm} tooltip="New Note">
             <PlusIcon />
           </SidebarButton>
 
-          {/* Re-Fetch All Notes */}
-          <SidebarButton disabled={!auth} onClick={() => getNotes()} tooltip="Refresh All Notes">
+          {/* Refresh All Notes */}
+          <SidebarButton
+            isDisabled={!auth}
+            onClickHandle={() => getNotes()}
+            tooltip="Refresh All Notes"
+          >
             <NoteIcon />
           </SidebarButton>
 
@@ -52,12 +57,12 @@ export default function Sidebar() {
           <SidebarSeperator />
 
           {/* Toggle App Theme */}
-          <SidebarButton onClick={toggleTheme} tooltip="Toggle Theme">
+          <SidebarButton onClickHandle={toggleTheme} tooltip="Toggle Theme">
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </SidebarButton>
 
           {/* Go to top of page */}
-          <SidebarButton onClick={backToTop} tooltip="Back To Top">
+          <SidebarButton onClickHandle={backToTop} tooltip="Back To Top">
             <AngleUpIcon />
           </SidebarButton>
 
@@ -66,8 +71,8 @@ export default function Sidebar() {
 
           {/* Sign out */}
           <SidebarButton
-            disabled={!auth}
-            onClick={() => setLogoutModalActive(true)}
+            isDisabled={!auth}
+            onClickHandle={() => setLogoutModalActive(true)}
             tooltip="Sign Out"
           >
             {auth ? <SignOutIcon /> : <SignInIcon />}
