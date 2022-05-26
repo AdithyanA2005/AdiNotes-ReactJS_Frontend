@@ -12,7 +12,7 @@ export default function HamBurger() {
     <>
       <div className="absolute left-0 flex justify-center items-center h-full w-16">
         <button
-          className="group relative h-11 w-11 bg-green-500 text-white hover:rounded-md rounded-xl flex items-center justify-center transition-all ease-in-out duration-300"
+          className="group relative h-11 w-11 bg-sky-500 text-white hover:rounded-md rounded-xl flex items-center justify-center transition-all ease-in-out duration-300"
           onClick={toggleSidebar}
         >
           {/* Burger Icon */}

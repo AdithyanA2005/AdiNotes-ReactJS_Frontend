@@ -8,7 +8,7 @@ export default function NavBrand() {
       <NavLink to="/">
         <div className="flex transition-all duration-300 ease-linear ">
           <img src={logo} className="mr-1 h-6" alt="Logo" />
-          <span className="self-center text-xl font-semibold text-green-500 dark:text-green-400">
+          <span className="self-center text-xl font-semibold text-sky-500 dark:text-sky-400">
             AdiNotes
           </span>
         </div>

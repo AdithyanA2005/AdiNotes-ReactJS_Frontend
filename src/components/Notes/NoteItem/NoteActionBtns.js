@@ -9,7 +9,7 @@ export default function NoteActionBtns({ deleteHandle, openUpdateNoteHandle }) {
         {/* Edit Button */}
         <button
           onClick={openUpdateNoteHandle}
-          className="group-hover:scale-100 scale-0 w-4 hover:w-[18px] transition-all duration-300 opacity-70 hover:opacity-100 text-slate-500 hover:text-purple-500"
+          className="group-hover:scale-100 scale-0 w-4 hover:w-[18px] transition-all duration-300 opacity-70 hover:opacity-100 text-slate-500 hover:text-emerald-500"
         >
           <EditIcon />
         </button>

@@ -7,11 +7,12 @@ import SignUpForm from "../components/SignUpForm";
 import AuthContext from "../context/Auth/AuthContext";
 
 export default function Landing() {
+  // Contexts
   const { loginModalActive, signUpModalActive } = useContext(AuthContext);
 
   return (
     <>
-      {/* Authentication Modals */}
+      {/* Authentication Modals If Required*/}
       {loginModalActive && <LoginForm />}
       {signUpModalActive && <SignUpForm />}
 
@@ -20,7 +21,7 @@ export default function Landing() {
         <Brand />
 
         {/* Login and Register Action Buttons */}
-        <div className="max-w-3xl w-full mt-12 flex flex-wrap justify-center items-center gap-8">
+        <div className="max-w-3xl w-full mt-12 flex gap-4 flex-wrap justify-center items-center">
           <NewAccountBtn />
           <LoginBtn />
         </div>

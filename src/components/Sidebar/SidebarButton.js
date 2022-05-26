@@ -25,14 +25,14 @@ export default function SidebarButton({ children, tooltip, isDisabled, onClickHa
 
     // The base classes
     classes.push(
-      "group relative h-12 shadow-lg flex justify-start items-center transition-all duration-300 ease-in-out text-green-500 bg-slate-50 dark:text-green-500 dark:bg-slate-800"
+      "group relative h-12 shadow-lg flex justify-start items-center transition-all duration-300 ease-in-out text-sky-500 bg-slate-50 dark:text-sky-500 dark:bg-slate-800"
     );
 
     // Classes according to disabled state
     if (isDisabled) classes.push("cursor-not-allowed");
     else
       classes.push(
-        "cursor-pointer hover:text-white dark:hover:text-white hover:bg-green-500 dark:hover:bg-green-500"
+        "cursor-pointer hover:text-white dark:hover:text-white hover:bg-sky-500 dark:hover:bg-sky-500"
       );
 
     // Classes according to sidebar expanded state

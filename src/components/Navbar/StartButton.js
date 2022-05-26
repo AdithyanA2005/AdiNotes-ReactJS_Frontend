@@ -12,14 +12,14 @@ export default function StartButton() {
       {auth ? (
         <button
           onClick={openNewNoteForm}
-          className="hidden md:flex font-semibold text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 rounded-lg text-sm px-4 py-[0.6rem] text-center mr-3 md:mr-0 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-700"
+          className="hidden md:flex font-semibold text-white bg-emerald-400 hover:bg-emerald-500 focus:ring-4 focus:outline-none focus:ring-emerald-300 rounded-lg text-sm px-4 py-[0.6rem] text-center mr-3 md:mr-0 dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:ring-emerald-700"
         >
           Create New Note
         </button>
       ) : (
         <button
           onClick={() => setLoginModalActive(true)}
-          className="hidden md:flex font-semibold text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 rounded-lg text-sm px-4 py-[0.6rem] text-center mr-3 md:mr-0 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-700"
+          className="hidden md:flex font-semibold text-white bg-emerald-400 hover:bg-emerald-500 focus:ring-4 focus:outline-none focus:ring-emerald-300 rounded-lg text-sm px-4 py-[0.6rem] text-center mr-3 md:mr-0 dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:ring-emerald-700"
         >
           Login To Account
         </button>

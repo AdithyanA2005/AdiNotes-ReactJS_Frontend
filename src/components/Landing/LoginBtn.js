@@ -8,7 +8,7 @@ export default function LoginBtn() {
     <>
       <button
         onClick={() => setLoginModalActive(true)}
-        className="text-white text-center text-md font-bold py-3 h-fit px-4 w-48 rounded-lg bg-green-500 hover:bg-green-600"
+        className="text-white text-center text-md font-bold py-3 h-fit px-4 w-full min-w-[1rem] max-w-[18rem] sm:max-w-[13rem] rounded-lg bg-sky-500 hover:bg-sky-600"
       >
         Login
       </button>

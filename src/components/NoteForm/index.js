@@ -112,7 +112,7 @@ export default function CreateNew() {
             value={noteTitle}
             placeholder="Title"
             maxLength={titleMaxLen}
-            className="flex-1 outline-0 bg-inherit font-medium text-lg text-green-400 placeholder:text-green-400"
+            className="flex-1 outline-0 bg-inherit font-medium text-lg text-sky-400 placeholder:text-sky-400"
             onKeyDown={handleEscapeOnKeyDown}
             onChange={titleOnChangeHandle}
           />
@@ -153,7 +153,7 @@ export default function CreateNew() {
             <button
               type="submit"
               disabled={!noteTitle || !noteDescription || noteTitleErr || noteDescriptionErr}
-              className="disabled:cursor-not-allowed disabled:bg-opacity-50 text-white bg-purple-600 text-sm font-medium rounded-md py-2 px-2.5"
+              className="disabled:cursor-not-allowed disabled:bg-opacity-50 text-white bg-emerald-600 text-sm font-medium rounded-md py-2 px-2.5"
             >
               Create Note
             </button>

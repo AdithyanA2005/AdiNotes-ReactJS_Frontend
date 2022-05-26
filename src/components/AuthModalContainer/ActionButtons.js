@@ -9,7 +9,7 @@ export default function ActionButtons({ closeHandle }) {
         {/* Submit Btn */}
         <button
           formNoValidate
-          className="w-32 p-2.5 rounded-lg font-semibold text-white bg-purple-500"
+          className="w-32 p-2.5 rounded-lg font-semibold text-white bg-emerald-500"
           type="submit"
         >
           Submit
