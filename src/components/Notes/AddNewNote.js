@@ -18,7 +18,7 @@ export default function AddNewNote() {
         mouseOverHandle={mouseOverHandle}
         mouseLeaveHandle={mouseLeaveHandle}
       >
-        <div className="h-16 flex justify-center text-cyan-500/60 dark:text-emerald-400/80">
+        <div className="h-16 flex justify-center text-cyan-500/60 dark:text-teal-400/80">
           <PlusIcon />
         </div>
       </Container>

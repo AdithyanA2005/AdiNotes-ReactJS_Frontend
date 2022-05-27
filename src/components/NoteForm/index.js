@@ -11,6 +11,7 @@ export default function CreateNew() {
   const titleMinLen = process.env.REACT_APP_NOTE_TITLE_MINIMUM_LENGTH;
   const descMaxLen = process.env.REACT_APP_NOTE_DESCRIPTION_MAXIMUM_LENGTH;
   const descMinLen = process.env.REACT_APP_NOTE_DESCRIPTION_MINIMUM_LENGTH;
+  const tagMaxLen = process.env.REACT_APP_NOTE_TAG_MINIMUM_LENGTH;
 
   // Context Variables
   const { addNote, updateNote } = useContext(NoteContext);
@@ -65,16 +66,6 @@ export default function CreateNew() {
   const descOnChangeHandle = (event) => {
     setNoteDescription(event.target.value);
     descValidations(event.target.value);
-  };
-
-  // Handle tag change
-  const handleTagOnChange = (event) => {
-    setNoteTag(event.target.value);
-  };
-
-  // Handle tag clear
-  const clearTagHandle = (event) => {
-    setNoteTag("General");
   };
 
   // Handle form submit
@@ -137,23 +128,16 @@ export default function CreateNew() {
         />
 
         {/* Show tag input when form is expanded */}
-        {formExpanded && (
-          <TagInput
-            closeBtnHandle={clearTagHandle}
-            value={noteTag}
-            onChange={handleTagOnChange}
-            maxLength={15}
-          />
-        )}
+        {formExpanded && <TagInput maxLength={tagMaxLen} />}
 
         {/* Submit and close button when expanded */}
         {formExpanded && (
-          <div className="flex justify-between mt-2">
+          <div className="flex justify-between mt-1.5">
             {/* Submit Button */}
             <button
               type="submit"
               disabled={!noteTitle || !noteDescription || noteTitleErr || noteDescriptionErr}
-              className="disabled:cursor-not-allowed disabled:bg-opacity-50 text-white bg-emerald-600 text-sm font-medium rounded-md py-2 px-2.5"
+              className="disabled:cursor-not-allowed disabled:bg-opacity-50 text-white bg-teal-500 hover:bg-teal-600 text-sm font-medium rounded-md py-2 px-2.5"
             >
               Create Note
             </button>

@@ -5,7 +5,7 @@ export default function Brand() {
     <>
       <h1 className="text-sky-500 dark:text-sky-400 text-6xl sm:text-7xl text-center font-bold">
         Your Notes In The Cloud{" "}
-        <span className="bg-clip-text lg:block text-transparent bg-gradient-to-r from-blue-500 to-emerald-400">
+        <span className="bg-clip-text lg:block text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
           AdiNotes
         </span>
       </h1>

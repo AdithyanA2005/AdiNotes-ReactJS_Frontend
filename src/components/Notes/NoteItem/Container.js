@@ -21,7 +21,7 @@ export default function Container({
         <div
           className={`
           absolute -top-24 -bottom-24 -left-24 -right-24 group-hover:animate-spin
-          ${specialBorder && "bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-400"}`}
+          ${specialBorder && "bg-gradient-to-r from-sky-500 via-teal-500 to-teal-400"}`}
         />
 
         {/* Main Card */}
