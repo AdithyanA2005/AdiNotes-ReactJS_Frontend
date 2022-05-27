@@ -36,7 +36,7 @@ export default function TagInput() {
       {/* Close Icon */}
       <span
         onClick={clearTagHandle}
-        className="flex w-4 h-inherit text-slate-500 dark:text-slate-400 dark:hover:text-slate-300"
+        className="flex w-4 h-inherit cursor-pointer text-slate-500 dark:text-slate-400 dark:hover:text-slate-300"
       >
         <CloseIcon />
       </span>

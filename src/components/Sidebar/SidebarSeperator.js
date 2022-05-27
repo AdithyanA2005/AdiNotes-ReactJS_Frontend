@@ -1,7 +1,7 @@
 export default function SidebarSeperator() {
   return (
     <>
-      <hr className="outline-0 my-2 rounded-full dark:border-gray-300" />
+      <hr className="outline-0 my-2 rounded-full border-slate-300 dark:border-gray-500" />
     </>
   );
 }
