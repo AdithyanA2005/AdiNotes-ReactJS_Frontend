@@ -35,7 +35,7 @@ export default function Layout() {
         </div>
 
         {/* MAIN APP */}
-        <div className="ml-16">
+        <div className="sm:ml-16">
           <div className="pt-16 min-h-screen flex">
             <main className="py-4 px-2 w-full" id="main-app">
               <Outlet />

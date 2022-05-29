@@ -42,7 +42,7 @@ export default function Sidebar() {
         ref={sidebarRef}
         onPointerLeave={handleSidebarPointerLeave}
         className={`${
-          sidebarExpanded ? "w-60" : "w-16"
+          sidebarExpanded ? "translate-x-0 w-60" : "-translate-x-full sm:translate-x-0 w-16"
         } z-40 fixed transition-all ease-in-out duration-300 h-screen max-h-screen top-0 left-0 mt-16 shadow-lg`}
       >
         <div className="flex flex-col gap-4 p-2.5 pt-5 h-full  bg-white dark:text-white dark:bg-slate-900">
