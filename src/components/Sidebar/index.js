@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
 import { ReactComponent as NoteIcon } from "../../assets/note.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
@@ -7,36 +7,43 @@ import { ReactComponent as SignOutIcon } from "../../assets/signout.svg";
 import { ReactComponent as AngleUpIcon } from "../../assets/sortup.svg";
 import { ReactComponent as SunIcon } from "../../assets/sun.svg";
 import AuthContext from "../../context/Auth/AuthContext";
+import NavigationContext from "../../context/Navigation/NavigationContext";
 import NoteContext from "../../context/Note/NoteContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
-import SidebarContext from "../../context/Sidebar/SidebarContext";
 import ThemeContext from "../../context/Theme/ThemeContext";
 import SidebarButton from "./SidebarButton";
 import SidebarSeperator from "./SidebarSeperator";
 
 export default function Sidebar() {
   // Contexts
-  const { sidebarExpanded, setSidebarExpanded } = useContext(SidebarContext);
+  const { sidebarRef, sidebarExpanded, setSidebarExpanded } = useContext(NavigationContext);
   const { auth, setLogoutModalActive } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { openNewNoteForm } = useContext(NoteFormContext);
+  const { navigationRef } = useContext(NavigationContext)
   const { getNotes } = useContext(NoteContext);
 
   // Scroll Back to Top Of The Page
   const backToTop = () => window.scroll(0, 0);
 
-  // Set sidebar not expanded
-  const handleSidebarMouseLeave = () => {
-    setSidebarExpanded(false);
-  };
+  // Set sidebar collapse on pointer leave
+  const handleSidebarPointerLeave = () => setSidebarExpanded(false);
 
+  useEffect(() => {
+    // Set sidebar collapsed when clicking outside navbar or sidebar
+    const handleClick = (event) => { if (!navigationRef.current.contains(event.target)) return setSidebarExpanded(false) }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+  
   return (
     <>
       <div
+        ref={sidebarRef}
+        onPointerLeave={handleSidebarPointerLeave}
         className={`${
           sidebarExpanded ? "w-60" : "w-16"
         } z-40 fixed transition-all ease-in-out duration-300 h-screen max-h-screen top-0 left-0 mt-16 shadow-lg`}
-        onMouseLeave={handleSidebarMouseLeave}
       >
         <div className="flex flex-col gap-4 p-2.5 pt-5 h-full  bg-white dark:text-white dark:bg-slate-900">
           {/* Create New Note */}

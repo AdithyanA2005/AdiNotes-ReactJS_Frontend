@@ -1,16 +1,18 @@
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
 import JumbToMainContent from "./components/JumbToMainContent";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import LoaderContext from "./context/Loader/LoaderContext";
+import NavigationContext from "./context/Navigation/NavigationContext";
 import ThemeContext from "./context/Theme/ThemeContext";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Layout() {
   const { progress, setProgress } = useContext(LoaderContext);
+  const { navigationRef } = useContext(NavigationContext)
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -27,8 +29,10 @@ export default function Layout() {
         />
 
         {/* Navigation */}
-        <Navbar />
-        <Sidebar />
+        <div ref={navigationRef}>
+          <Navbar />
+          <Sidebar />
+        </div>
 
         {/* MAIN APP */}
         <div className="ml-16">

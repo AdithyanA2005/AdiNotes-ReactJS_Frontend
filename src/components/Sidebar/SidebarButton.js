@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { toast } from "react-toastify";
-import SidebarContext from "../../context/Sidebar/SidebarContext";
+import NavigationContext from "../../context/Navigation/NavigationContext";
 import Tooltip from "../Tooltip";
 import ItemName from "./ItemName";
 
 export default function SidebarButton({ children, tooltip, isDisabled, onClickHandle }) {
   // Contexts
-  const { sidebarExpanded } = useContext(SidebarContext);
+  const { sidebarExpanded } = useContext(NavigationContext);
 
   // Only allow onClick function to run if button is not disabled
   const filteredOnClickHandle = () => {

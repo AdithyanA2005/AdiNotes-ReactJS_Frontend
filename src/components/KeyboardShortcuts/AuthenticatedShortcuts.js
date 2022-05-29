@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
-import SidebarContext from "../../context/Sidebar/SidebarContext";
+import NavigationContext from "../../context/Navigation/NavigationContext";
 import { OPEN_NEW_NOTE_WITH_KEY, TOGGLE_SIDEBAR_WITH_KEY } from "./ShortCutList";
 
 function AuthenticatedShortcuts(props) {
   const { openNewNoteForm } = useContext(NoteFormContext);
-  const { toggleSidebar } = useContext(SidebarContext);
+  const { toggleSidebar } = useContext(NavigationContext);
 
   useEffect(() => {
     // Shortcuts by pressing keycombination `ctrl + <key>}`
