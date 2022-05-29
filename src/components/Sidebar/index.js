@@ -34,7 +34,7 @@ export default function Sidebar() {
     const handleClick = (event) => { if (!navigationRef.current.contains(event.target)) return setSidebarExpanded(false) }
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
-  }, []);
+  });
   
   return (
     <>

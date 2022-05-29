@@ -23,7 +23,7 @@ function AuthenticatedShortcuts(props) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  });
 
   return <>{props.children}</>;
 }
