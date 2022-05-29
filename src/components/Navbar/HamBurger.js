@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { ReactComponent as BurgerIcon } from "../../assets/burger.svg";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
+import { TOGGLE_SIDEBAR_WITH_KEY } from "../KeyboardShortcuts/ShortCutList";
 import Tooltip from "../Tooltip";
 import NavigationContext from "../../context/Navigation/NavigationContext";
-import { TOGGLE_SIDEBAR_WITH_KEY } from "../KeyboardShortcuts/ShortCutList";
 
 export default function HamBurger() {
   const { sidebarActive, toggleSidebar } = useContext(NavigationContext);
