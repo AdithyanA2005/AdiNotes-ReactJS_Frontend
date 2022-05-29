@@ -4,6 +4,7 @@ import AuthContext from "../../context/Auth/AuthContext";
 import AuthModalContainer from "../AuthModalContainer";
 
 export default function LogoutForm() {
+  // Contexts
   const { setLogoutModalActive, logoutFromAccount } = useContext(AuthContext);
 
   // Handle Logout submit
