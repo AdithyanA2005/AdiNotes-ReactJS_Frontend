@@ -13,15 +13,16 @@ export default function Container({
       <div
         onClick={onClickHandle}
         onDoubleClick={openUpdateNoteHandle}
-        className={`group overflow-hidden hover:scale-110 hover:z-10 relative w-full md:w-[49%] min-h-[13rem] md:max-w-[19.3rem] transition-all ease-in-out duration-500 rounded-md shadow-md hover:shadow-sky-300 dark:hover:shadow-sky-400 bg-white dark:bg-slate-700
+        className={`group overflow-hidden hover:scale-105 hover:z-10 relative w-full md:w-[49%] min-h-[13rem] md:max-w-[19.3rem] transition-all ease-in-out duration-500 rounded-md shadow-md hover:shadow-sky-300 dark:hover:shadow-sky-400 bg-white dark:bg-slate-700
           ${specialBorder ? "cursor-pointer" : "border border-slate-200 dark:border-slate-600"}
         `}
       >
         {/* A simple background div which will act as a border for the special card  */}
         <div
           className={`
-          absolute -top-24 -bottom-24 -left-24 -right-24 group-hover:animate-spin
-          ${specialBorder && "bg-gradient-to-r from-sky-500 via-teal-500 to-teal-400"}`}
+            absolute -top-52 -bottom-52 -left-52 -right-52 group-hover:animate-spin
+            ${specialBorder && "bg-gradient-to-r from-sky-500 via-teal-500 to-teal-400"}
+          `}
         />
 
         {/* Main Card */}
