@@ -23,7 +23,7 @@ export default function Sidebar() {
   const { navigationRef } = useContext(NavigationContext)
   const { getNotes } = useContext(NoteContext);
 
-  // Scroll Back to Top Of The Page
+  // Function to scroll back to top of the page
   const backToTop = () => window.scroll(0, 0);
 
   // Set sidebar collapse on pointer leave

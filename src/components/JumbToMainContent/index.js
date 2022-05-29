@@ -3,12 +3,12 @@ import AuthContext from "../../context/Auth/AuthContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 
 export default function JumbToMainContent() {
-  // Accessiblity Button
-  const [buttonActive, setButtonActive] = useState(false);
-
   // Contexts
   const { openNewNoteForm } = useContext(NoteFormContext);
   const { auth, setLoginModalActive } = useContext(AuthContext);
+  
+  // Accessiblity Button State
+  const [buttonActive, setButtonActive] = useState(false);
 
   // Show button focus
   const handleButtonFocusIn = () => setButtonActive(true);
@@ -26,7 +26,7 @@ export default function JumbToMainContent() {
     return setButtonActive(false);
   };
 
-  // Handle escape on esc key down
+  // Handle escape key down
   const handleOnKeyDown = (event) => {
     if (event.key === "Escape") return setButtonActive(false);
   };

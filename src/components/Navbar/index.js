@@ -1,5 +1,5 @@
-import NavBrand from "./NavBrand";
 import HamBurger from "./HamBurger";
+import NavBrand from "./NavBrand";
 import StartButton from "./StartButton";
 
 export default function Navbar() {
