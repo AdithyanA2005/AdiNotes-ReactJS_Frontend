@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useRef } from "react";
+import { useContext } from "react";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 

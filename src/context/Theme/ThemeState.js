@@ -9,7 +9,7 @@ const ThemeState = (props) => {
   const autoCompleteInputTheme = (theme) => {
     return document.documentElement.style.setProperty(
       "--input-text-color",
-      `${theme == "dark" ? "rgb(203, 213, 225)" : "rgb(71, 85, 105)"}`
+      `${theme === "dark" ? "rgb(203, 213, 225)" : "rgb(71, 85, 105)"}`
     );
   };
 

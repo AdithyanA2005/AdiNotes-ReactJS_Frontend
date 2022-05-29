@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 import NoteContext from "./NoteContext";
 import LoaderContext from "../Loader/LoaderContext";
 import AuthContext from "../Auth/AuthContext";
-import NoteFormContext from "../NoteForm/NoteFormContext";
 
 const NoteState = (props) => {
   const { setProgress } = useContext(LoaderContext);

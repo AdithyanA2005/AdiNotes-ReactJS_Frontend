@@ -14,7 +14,7 @@ export default function AuthModalContainer({
   useEffect(() => {
     // Close Modal On Escape Press
     const handleKeyDown = (event) => {
-      if (event.key == "Escape") return closeHandle();
+      if (event.key === "Escape") return closeHandle();
     };
 
     // Escape key press handle

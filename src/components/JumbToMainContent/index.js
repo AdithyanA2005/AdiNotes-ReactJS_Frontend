@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../context/Auth/AuthContext";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 

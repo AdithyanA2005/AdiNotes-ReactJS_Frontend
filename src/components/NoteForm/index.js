@@ -23,7 +23,6 @@ export default function CreateNew() {
     closeNewNoteForm,
     noteId,
     noteTag,
-    setNoteTag,
     noteTitle,
     setNoteTitle,
     noteDescription,
@@ -37,7 +36,7 @@ export default function CreateNew() {
 
   // Closes the form if escape key is pressed
   const handleEscapeOnKeyDown = (event) => {
-    if (event.key == "Escape") return closeNewNoteForm();
+    if (event.key === "Escape") return closeNewNoteForm();
   };
 
   // Does the validations on the tile input
@@ -80,16 +79,16 @@ export default function CreateNew() {
     // Close the form by clicking outside the form body
     const main_app = document.getElementById("main-app");
     const handleClick = (e) => !formRef.current.contains(e.target) && closeNewNoteForm();
-
     main_app.addEventListener("click", handleClick);
     return () => main_app.removeEventListener("click", handleClick);
-  }, []);
+  });
 
   return (
     <>
       <form
         ref={formRef}
         onSubmit={handleFormSubmit}
+        onKeyDown={handleEscapeOnKeyDown}
         className="p-3.5 w-11/12 md:max-w-2xl mx-auto rounded-lg shadow-lg flex flex-col gap-5 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700"
       >
         {/* Note Title Input When Expanded */}
@@ -104,7 +103,6 @@ export default function CreateNew() {
             placeholder="Title"
             maxLength={titleMaxLen}
             className="flex-1 outline-0 bg-inherit font-medium text-lg text-sky-400 placeholder:text-sky-400"
-            onKeyDown={handleEscapeOnKeyDown}
             onChange={titleOnChangeHandle}
           />
         )}
@@ -122,7 +120,6 @@ export default function CreateNew() {
           placeholder="Take a note"
           maxLength={descMaxLen}
           className="flex-1 outline-0 bg-inherit font-normal text-base text-slate-600 dark:text-slate-300 placeholder:text-slate-600 dark:placeholder:text-slate-300"
-          onKeyDown={handleEscapeOnKeyDown}
           onChange={descOnChangeHandle}
           onClick={openNewNoteForm}
         />
