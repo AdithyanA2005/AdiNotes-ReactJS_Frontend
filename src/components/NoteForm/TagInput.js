@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ReactComponent as CloseIcon } from "../../assets/close.svg";
 import NoteFormContext from "../../context/NoteForm/NoteFormContext";
 
-export default function TagInput() {
+export default function TagInput({maxLength}) {
   // Contexts
   const { noteTag, setNoteTag } = useContext(NoteFormContext);
 
@@ -23,6 +23,7 @@ export default function TagInput() {
         <input
           type="text"
           value={noteTag}
+          maxLength={maxLength}
           onChange={handlOnChange}
           placeholder="General"
           className={`${fontClasses} absolute top-0 bottom-0 left-0 right-0  h-full w-full border-0 outline-0 bg-inherit grid place-items-center`}

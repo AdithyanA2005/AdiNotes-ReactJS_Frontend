@@ -9,6 +9,7 @@ export default function AuthModalContainer({
   modalHeading,
   children,
 }) {
+  // Refferences
   const modalRef = useRef();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function AuthModalContainer({
       document.removeEventListener("keydown", handleKeyDown);
       document.documentElement.style.overflowY = "auto";
     };
-  }, []);
+  });
 
   return (
     <>

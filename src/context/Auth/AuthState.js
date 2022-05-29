@@ -6,13 +6,13 @@ import LoaderContext from "../Loader/LoaderContext";
 import AuthContext from "./AuthContext";
 
 const AuthState = (props) => {
+  const axios = getAxios();
   const [auth, setAuth] = useState(null);
-  const [loginModalActive, setLoginModalActive] = useState(false);
   const [signUpModalActive, setSignUpModalActive] = useState(false);
   const [logoutModalActive, setLogoutModalActive] = useState(false);
-  const { setProgress } = useContext(LoaderContext);
+  const [loginModalActive, setLoginModalActive] = useState(false);
   const { setUsernameErr, setNameErr, setEmailErr, setPasswordErr } = useContext(AuthFormContext);
-  const axios = getAxios();
+  const { setProgress } = useContext(LoaderContext);
 
   useEffect(() => {
     // Looks for a logged in user in localStorage
@@ -31,11 +31,12 @@ const AuthState = (props) => {
       setEmailErr();
       setPasswordErr();
     }
+  // eslint-disable-next-line
   }, [signUpModalActive]);
 
   const handleNewAccountApiErrors = (form, errors) => {
     console.log(errors);
-    errors.map((error, index) => {
+    errors.forEach((error, index) => {
       if (error.param === "username") setUsernameErr(error.msg);
       if (error.param === "name") setNameErr(error.msg);
       if (error.param === "email") setEmailErr(error.msg);
